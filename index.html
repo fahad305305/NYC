@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sonic Shop</title>
+  <style>
+    body {
+      background: #0a0a23;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .header h1 {
+      color: #5865F2;
+      font-size: 3em;
+    }
+    .header img {
+      width: 120px;
+      height: auto;
+      margin-top: 10px;
+    }
+    .products-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .product {
+      background: #292b6e;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 0 10px #444;
+      flex: 1 1 calc(45% - 40px);
+    }
+    .product h2 {
+      margin-bottom: 10px;
+    }
+    .product p {
+      font-size: 1.2em;
+    }
+    .buy-button {
+      background: #25d366;
+      color: white;
+      padding: 10px 20px;
+      display: inline-block;
+      text-decoration: none;
+      margin-top: 10px;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+    .buy-button:hover {
+      background: #1fa055;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Sonic Shop</h1>
+    <p>أفضل العروض الرقمية | تواصل معنا واطلب الآن</p>
+    <img src="https://cdn.discordapp.com/attachments/1279907327046062161/1378948053800714320/9df5852009f3dd74e802f6a53b233917-removebg-preview.png?ex=683e74f3&is=683d2373&hm=bce22a032d0e5372fa663ea1f24c0b63a56e940e63626e3fa494938335893abc&">
+  </div>
+
+  <div class="products-container">
+    <div class="product">
+      <h2>🎁 Nitro - شهر واحد</h2>
+      <p>السعر: 12 ريال</p>
+      <a href="https://wa.me/96565798061?text=أبي%20أشتري%20نايترو%20شهر" class="buy-button">اطلب عبر واتساب</a>
+    </div>
+
+    <div class="product">
+      <h2>🔥 14 بوست - شهر</h2>
+      <p>السعر: 16 ريال</p>
+      <a href="https://wa.me/96565798061?text=أبي%20أشتري%2014%20بوست%20شهر" class="buy-button">اطلب عبر واتساب</a>
+    </div>
+
+    <div class="product">
+      <h2>📌 اختصارات</h2>
+      <p>السعر: على حسب</p>
+      <a href="https://wa.me/96565798061?text=أبي%20أطلب%20اختصارات" class="buy-button">اطلب عبر واتساب</a>
+    </div>
+
+    <div class="product">
+      <h2>✨ أفكت</h2>
+      <p>السعر: على حسب</p>
+      <a href="https://wa.me/96565798061?text=أبي%20أطلب%20أفكت" class="buy-button">اطلب عبر واتساب</a>
+    </div>
+
+    <div class="product">
+      <h2>🎨 ديكوريشن</h2>
+      <p>السعر: على حسب</p>
+      <a href="https://wa.me/96565798061?text=أبي%20أطلب%20ديكوريشن" class="buy-button">اطلب عبر واتساب</a>
+    </div>
+
+    <div class="product">
+      <h2>🤖 بوتات</h2>
+      <p>السعر: غير متوفر حالياً</p>
+      <a href="#" class="buy-button" style="background:#555; cursor:not-allowed;" onclick="return false;">غير متوفر</a>
+    </div>
+
+    <div class="product">
+      <h2>🛠️ أداة نسخ</h2>
+      <p>السعر: 10 ريال</p>
+      <a href="https://wa.me/96565798061?text=أبي%20أطلب%20أداة%20نسخ" class="buy-button">اطلب عبر واتساب</a>
+    </div>
+  </div>
+</body>
+</html>
