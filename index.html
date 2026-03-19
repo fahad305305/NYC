@@ -6,55 +6,49 @@
 <title>NYC Store</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:'Poppins',sans-serif;background:#050505;color:#fff}
+body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(180deg,#020617,#050505);color:#fff}
 
 .nav{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;position:fixed;width:100%;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);z-index:100}
 .nav img{height:40px}
 
-.menu{display:flex;gap:20px;align-items:center}
+.cart-btn{cursor:pointer}
 
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero h1{font-size:60px}
-.hero span{background:linear-gradient(90deg,#6a5cff,#00c6ff);-webkit-background-clip:text;color:transparent}
+.hero span{background:linear-gradient(90deg,#3b82f6,#06b6d4);-webkit-background-clip:text;color:transparent}
 
 .section{padding:100px 20px;text-align:center}
 
-.categories{display:flex;gap:20px;justify-content:center;margin-top:-40px}
-.cat{background:#111;padding:40px 60px;border-radius:20px;cursor:pointer;font-size:22px;transition:.3s}
-.cat:hover{transform:scale(1.08)}
+.categories{display:flex;gap:20px;justify-content:center;margin-top:10px}
+.cat{background:#0f172a;padding:35px 55px;border-radius:20px;cursor:pointer;font-size:20px;transition:.3s}
+.cat:hover{transform:scale(1.05)}
 
 .products{display:none;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.card{background:#111;border-radius:20px;overflow:hidden;cursor:pointer;transition:.3s}
-.card img{width:100%;height:150px;object-fit:cover}
-.card:hover{transform:translateY(-8px)}
+.card{background:#0f172a;border-radius:20px;overflow:hidden;cursor:pointer;transition:.3s}
+.card img{width:100%;height:180px;object-fit:cover}
+.card:hover{transform:translateY(-6px)}
 .card div{padding:15px}
 
-.review-container{overflow:hidden;width:320px;margin:auto}
-.review-track{display:flex;animation:scroll 12s linear infinite}
-.review{min-width:320px;background:#111;padding:20px;border-radius:20px;text-align:center}
-.star{color:gold}
+.review-box{position:fixed;bottom:20px;left:20px;background:#0f172a;padding:20px;border-radius:20px;width:250px}
+
+.tiktok{position:fixed;bottom:20px;right:20px}
+.tiktok img{width:50px;cursor:pointer}
 
 .cart-page{display:none;padding:100px 20px}
-.btn{padding:10px 20px;background:linear-gradient(90deg,#6a5cff,#00c6ff);border:none;border-radius:10px;color:#fff;cursor:pointer}
+.btn{padding:10px 20px;background:linear-gradient(90deg,#3b82f6,#06b6d4);border:none;border-radius:10px;color:#fff;cursor:pointer}
 
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-320px)}}
 </style>
 </head>
 <body>
 
 <div class="nav">
-<img src="https://via.placeholder.com/100x40?text=NYC" alt="logo">
-<div class="menu">
-<button onclick="showSection('subs')">الحسابات</button>
-<button onclick="showSection('profiles')">الملفات</button>
-<div onclick="openCart()" style="cursor:pointer">🛒 <span id="cartCount">0</span></div>
-</div>
+<img src="https://via.placeholder.com/100x40?text=NYC">
+<div class="cart-btn" onclick="openCart()">🛒 <span id="cartCount">0</span></div>
 </div>
 
 <div class="hero">
 <h1>اشتراكات رقمية<br><span>بمستوى فاخر</span></h1>
-<p>نوفر لك أفضل الاشتراكات الرقمية بجودة عالية وتسليم فوري مع تجربة استخدام فاخرة ومريحة.
-هدفنا هو تقديم خدمة موثوقة وسريعة تلبي جميع احتياجاتك الرقمية بكل احترافية.</p>
+<p>نوفر أفضل الاشتراكات الرقمية بجودة عالية وتسليم سريع مع تجربة احترافية تليق فيك.</p>
 
 <div class="categories">
 <div class="cat" onclick="showSection('subs')">الحسابات الشهرية</div>
@@ -68,17 +62,13 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#050505;color:#fff}
 <img src="https://images.unsplash.com/photo-1581905764498-f1b60bae941a">
 <div>Netflix</div>
 </div>
-<div class="card" onclick="openProduct('Prime','أفلام ومسلسلات','2 KD')">
-<img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db">
-<div>Prime</div>
-</div>
 </div>
 
 <div class="section products" id="profiles">
 <h2>الملفات</h2>
-<div class="card" onclick="openProduct('Profile 1','ملف شخصي','1 KD')">
+<div class="card" onclick="openProduct('Profile','ملف شخصي','1 KD')">
 <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12">
-<div>Profile 1</div>
+<div>Profile</div>
 </div>
 </div>
 
@@ -89,16 +79,12 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#050505;color:#fff}
 <button class="btn" onclick="addToCart()">إضافة للسلة</button>
 </div>
 
-<div class="section">
-<h2>تقييم العملاء</h2>
-<div class="review-container">
-<div class="review-track">
-<div class="review">ما قصروا ⭐⭐⭐⭐⭐</div>
-<div class="review">تسليم سريع ⭐⭐⭐⭐⭐</div>
-<div class="review">خدمة ممتازة ⭐⭐⭐⭐⭐</div>
-<div class="review">تعامل راقي ⭐⭐⭐⭐⭐</div>
-</div>
-</div>
+<div class="review-box" id="review">ما قصروا ⭐⭐⭐⭐⭐</div>
+
+<div class="tiktok">
+<a href="https://www.tiktok.com/@f.0aha" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png">
+</a>
 </div>
 
 <div class="cart-page" id="cartPage">
@@ -134,14 +120,23 @@ function addToCart(){
 
 function openCart(){
  document.getElementById('cartPage').style.display='block';
- document.getElementById('subs').style.display='none';
- document.getElementById('profiles').style.display='none';
  let list='';
  cart.forEach(item=>{
   list+=`<li>${item.name} - ${item.price}</li>`;
  });
  document.getElementById('cartItems').innerHTML=list;
 }
+
+const reviews=[
+"ما قصروا ⭐⭐⭐⭐⭐",
+"تسليم سريع ⭐⭐⭐⭐⭐",
+"خدمة ممتازة ⭐⭐⭐⭐⭐"
+];
+let i=0;
+setInterval(()=>{
+ document.getElementById('review').innerText=reviews[i];
+ i=(i+1)%reviews.length;
+},3000);
 </script>
 
 </body>
