@@ -9,20 +9,10 @@
 body{margin:0;font-family:'Poppins',sans-serif;background:#1f1f1f;color:#60a5fa}
 
 .nav{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;position:fixed;width:100%;background:#111;z-index:100}
-
-.logo{font-weight:700;color:#60a5fa}
+.logo{font-weight:700}
 
 .cart{position:relative;cursor:pointer}
-.cart span{
- position:absolute;
- top:-8px;
- right:-10px;
- background:red;
- color:#fff;
- font-size:12px;
- padding:2px 6px;
- border-radius:50%;
-}
+.cart span{position:absolute;top:-8px;right:-10px;background:red;color:#fff;font-size:12px;padding:2px 6px;border-radius:50%}
 
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero h1{font-size:55px}
@@ -34,20 +24,33 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#1f1f1f;color:#60a5fa}
 .cat{background:#2a2a2a;padding:25px 40px;border-radius:15px;cursor:pointer;transition:.3s}
 .cat:hover{background:#3a3a3a}
 
-.products{display:none;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.products{display:none;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:25px}
 
-.card{background:#2a2a2a;border-radius:15px;padding:15px;cursor:pointer;transition:.3s}
-.card img{width:100%;height:150px;object-fit:contain}
-.card:hover{transform:scale(1.05)}
+.card{background:#2a2a2a;border-radius:15px;overflow:hidden;cursor:pointer;transition:.3s}
+.card img{width:100%;height:180px;object-fit:cover}
+.card:hover{transform:scale(1.04)}
+.card-content{padding:15px}
 
-.btn{background:#3b82f6;color:#fff;border:none;padding:10px;border-radius:10px;cursor:pointer;margin-top:10px}
+.btn{background:#3b82f6;color:#fff;border:none;padding:10px;border-radius:10px;cursor:pointer;margin-top:10px;width:100%}
 
+/* PRODUCT DETAILS */
+.product-details{display:none;padding:80px 20px;text-align:center}
+.product-box{background:#2a2a2a;border-radius:20px;padding:30px;max-width:400px;margin:auto}
+
+/* CART */
 .cart-page{display:none;padding:100px 20px}
+.cart-item{background:#2a2a2a;margin:10px auto;padding:10px;border-radius:10px;max-width:300px;display:flex;justify-content:space-between}
+.total{margin-top:20px;font-weight:bold}
 
-.review{position:fixed;bottom:20px;left:20px;background:#2a2a2a;padding:15px;border-radius:15px}
+/* REVIEW SLIDER */
+.review-container{position:fixed;bottom:20px;left:20px;width:250px;overflow:hidden}
+.review-track{display:flex;gap:10px;animation:slide 10s linear infinite}
+.review{min-width:250px;background:#2a2a2a;padding:15px;border-radius:15px;text-align:center}
+@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-260px)}}
 
-.tiktok{position:fixed;bottom:20px;right:20px}
-.tiktok img{width:45px}
+/* TIKTOK */
+.tiktok{position:fixed;bottom:20px;right:20px;background:#2a2a2a;padding:10px;border-radius:15px}
+.tiktok img{width:40px}
 
 </style>
 </head>
@@ -55,54 +58,68 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#1f1f1f;color:#60a5fa}
 
 <div class="nav">
 <div class="logo">NYC</div>
-<div class="cart" onclick="openCart()">
-🛒
-<span id="cartCount">0</span>
-</div>
+<div class="cart" onclick="openCart()">🛒<span id="cartCount">0</span></div>
 </div>
 
 <div class="hero">
 <h1>اشتراكات رقمية <br><span>بمستوى فاخر</span></h1>
 <p>أفضل جودة - تسليم سريع - تجربة احترافية</p>
-
 <div class="categories">
 <div class="cat" onclick="showSection('subs')">الحسابات الشهرية</div>
 <div class="cat" onclick="showSection('profiles')">الملفات الشخصية</div>
 </div>
 </div>
 
+<!-- PRODUCTS -->
 <div class="section products" id="subs">
 <h2>الحسابات</h2>
-<div class="card">
+<div class="card" onclick="openProduct('Netflix','اشتراك 4K + جميع الدول','3 KD')">
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg">
-<div>Netflix</div>
-<button class="btn" onclick="addToCart(event,'Netflix','3 KD')">إضافة</button>
+<div class="card-content">Netflix</div>
 </div>
 
-<div class="card">
+<div class="card" onclick="openProduct('Prime','أفلام ومسلسلات','2 KD')">
 <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png">
-<div>Prime</div>
-<button class="btn" onclick="addToCart(event,'Prime','2 KD')">إضافة</button>
+<div class="card-content">Prime</div>
 </div>
 </div>
 
 <div class="section products" id="profiles">
 <h2>الملفات</h2>
-<div class="card">
+<div class="card" onclick="openProduct('Profile','ملف شخصي','1 KD')">
 <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
-<div>Profile</div>
-<button class="btn" onclick="addToCart(event,'Profile','1 KD')">إضافة</button>
+<div class="card-content">Profile</div>
 </div>
 </div>
 
+<!-- PRODUCT DETAILS -->
+<div class="product-details" id="productPage">
+<div class="product-box">
+<h2 id="pname"></h2>
+<p id="pdesc"></p>
+<p id="pprice"></p>
+<button class="btn" onclick="addToCart()">إضافة للسلة</button>
+</div>
+</div>
+
+<!-- CART -->
 <div class="cart-page" id="cartPage">
 <h2>السلة</h2>
-<ul id="cartItems"></ul>
+<div id="cartItems"></div>
+<div class="total" id="total"></div>
 <button class="btn">الدفع</button>
 </div>
 
-<div class="review" id="review">ما قصروا ⭐⭐⭐⭐⭐</div>
+<!-- REVIEW -->
+<div class="review-container">
+<div class="review-track">
+<div class="review">ما قصروا ⭐⭐⭐⭐⭐</div>
+<div class="review">تسليم سريع ⭐⭐⭐⭐⭐</div>
+<div class="review">خدمة ممتازة ⭐⭐⭐⭐⭐</div>
+</div>
+</div>
 
+<!-- TIKTOK -->
 <div class="tiktok">
 <a href="https://www.tiktok.com/@f.0aha" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png">
@@ -111,33 +128,47 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#1f1f1f;color:#60a5fa}
 
 <script>
 let cart=[];
+let currentProduct={};
 
 function showSection(id){
  document.getElementById('subs').style.display='none';
  document.getElementById('profiles').style.display='none';
+ document.getElementById('productPage').style.display='none';
  document.getElementById('cartPage').style.display='none';
  document.getElementById(id).style.display='grid';
 }
 
-function addToCart(e,name,price){
- e.stopPropagation();
- cart.push({name,price});
+function openProduct(name,desc,price){
+ document.getElementById('productPage').style.display='block';
+ document.getElementById('pname').innerText=name;
+ document.getElementById('pdesc').innerText=desc;
+ document.getElementById('pprice').innerText=price;
+ currentProduct={name,price};
+ window.scrollTo(0,document.body.scrollHeight);
+}
+
+function addToCart(){
+ cart.push(currentProduct);
  document.getElementById('cartCount').innerText=cart.length;
 }
 
 function openCart(){
  document.getElementById('cartPage').style.display='block';
  let list='';
- cart.forEach(i=>{list+=`<li>${i.name} - ${i.price}</li>`});
+ let total=0;
+ cart.forEach((i,index)=>{
+ total+=parseFloat(i.price);
+ list+=`<div class="cart-item">${i.name} - ${i.price} <button onclick="removeItem(${index})">❌</button></div>`;
+ });
  document.getElementById('cartItems').innerHTML=list;
+ document.getElementById('total').innerText='المجموع: '+total+' KD';
 }
 
-const reviews=["ما قصروا ⭐⭐⭐⭐⭐","سريع 🔥","خدمة ممتازة ⭐⭐⭐⭐⭐"];
-let i=0;
-setInterval(()=>{
- document.getElementById('review').innerText=reviews[i];
- i=(i+1)%reviews.length;
-},3000);
+function removeItem(i){
+ cart.splice(i,1);
+ document.getElementById('cartCount').innerText=cart.length;
+ openCart();
+}
 </script>
 
 </body>
