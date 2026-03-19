@@ -4,33 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NYC Store</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:'Cairo',sans-serif;background:#1f1f1f;color:#e5e7eb}
+body{margin:0;font-family:'Poppins',sans-serif;background:#1f1f1f;color:#60a5fa}
 
-.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 40px;position:fixed;top:0;width:100%;background:#111;z-index:1000}
-.logo{font-weight:700;font-size:20px}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 40px;position:fixed;width:100%;background:#111}
+.logo{font-weight:700}
+
 .cart{position:relative;cursor:pointer}
 .cart span{position:absolute;top:-8px;right:-10px;background:red;color:#fff;font-size:12px;padding:2px 6px;border-radius:50%}
 
-.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:60px}
-.hero h1{font-size:48px}
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.hero h1{font-size:50px}
 
-.categories{display:flex;gap:20px;margin-top:20px}
-.cat{background:#2a2a2a;padding:18px 28px;border-radius:12px;cursor:pointer}
+.products{display:none;grid-template-columns:repeat(2,1fr);gap:20px;max-width:600px;margin:120px auto}
 
-.products{display:none;grid-template-columns:repeat(2,1fr);gap:20px;max-width:700px;margin:120px auto}
 .card{background:#2a2a2a;border-radius:12px;overflow:hidden}
 .card img{width:100%;height:140px;object-fit:cover}
 .card-content{text-align:center;padding:10px}
-.price{color:#60a5fa}
-.btn{background:#3b82f6;color:#fff;border:none;padding:6px 14px;border-radius:8px;cursor:pointer;margin-top:8px}
-
-.product-details{display:none;margin-top:120px;text-align:center}
-.product-box{background:#2a2a2a;padding:20px;border-radius:15px;max-width:400px;margin:auto;text-align:right}
+.price{color:#fff}
+.btn{background:#3b82f6;color:#fff;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;margin-top:8px}
 
 .cart-page{display:none;margin-top:120px;text-align:center}
-.cart-item{background:#2a2a2a;margin:10px auto;padding:10px;border-radius:10px;max-width:320px;display:flex;justify-content:space-between}
+.cart-item{background:#2a2a2a;margin:10px auto;padding:10px;border-radius:10px;max-width:300px;display:flex;justify-content:space-between}
 .total{color:#60a5fa;font-weight:bold}
 </style>
 </head>
@@ -38,72 +34,51 @@ body{margin:0;font-family:'Cairo',sans-serif;background:#1f1f1f;color:#e5e7eb}
 
 <div class="nav">
 <div class="logo">NYC Store</div>
-<div class="cart" onclick="openCart()">🛒<span id="cartCount">0</span></div>
+<div class="cart" onclick="openCart()">🛒<span id="count">0</span></div>
 </div>
 
 <div class="hero" id="home">
-<h1>اشتراكات رقمية فاخرة</h1>
-<div class="categories">
-<div class="cat" onclick="showProducts()">عرض المنتجات</div>
-</div>
+<h1>اشتراكات رقمية</h1>
+<button class="btn" onclick="showProducts()">عرض المنتجات</button>
 </div>
 
-<!-- PRODUCTS -->
 <div class="products" id="products">
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/OSN_logo.png"><div class="card-content">OSN<div class="price">15 ريال</div><button class="btn" onclick="openDetails('osn')">التفاصيل</button></div></div>
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"><div class="card-content">Netflix<div class="price">14 ريال</div><button class="btn" onclick="openDetails('netflix')">التفاصيل</button></div></div>
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png"><div class="card-content">Prime<div class="price">12 ريال</div><button class="btn" onclick="openDetails('prime')">التفاصيل</button></div></div>
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Shahid_logo.svg"><div class="card-content">Shahid<div class="price">24 ريال</div><button class="btn" onclick="openDetails('shahid')">التفاصيل</button></div></div>
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg">
+<div class="card-content">Netflix<div class="price">3 KD</div>
+<button class="btn" onclick="addToCart('Netflix',3)">إضافة</button></div>
 </div>
 
-<!-- DETAILS -->
-<div class="product-details" id="details">
-<div class="product-box" id="detailsText"></div>
-<button class="btn" onclick="addToCart()">إضافة للسلة</button>
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/OSN_logo.png">
+<div class="card-content">OSN<div class="price">3 KD</div>
+<button class="btn" onclick="addToCart('OSN',3)">إضافة</button></div>
+</div>
 </div>
 
-<!-- CART -->
 <div class="cart-page" id="cartPage">
 <h2>السلة</h2>
-<div id="cartItems"></div>
+<div id="items"></div>
 <div class="total" id="total"></div>
 <button class="btn">شراء</button>
 </div>
 
 <script>
 let cart=[];
-let current=null;
-
-const info={
-osn:{text:`OSN\nحساب شهري 15 ريال\nملف خاص 6 ريال`,price:15},
-netflix:{text:`Netflix\nحساب 14 ريال\nملف خاص 6 ريال`,price:14},
-prime:{text:`Prime\nحساب 12 ريال\nملف خاص 6 ريال`,price:12},
-shahid:{text:`Shahid\nحساب 24 ريال`,price:24}
-};
 
 function showProducts(){
  document.getElementById('home').style.display='none';
  document.getElementById('products').style.display='grid';
- document.getElementById('details').style.display='none';
  document.getElementById('cartPage').style.display='none';
 }
 
-function openDetails(type){
- document.getElementById('products').style.display='none';
- document.getElementById('details').style.display='block';
- document.getElementById('detailsText').innerText=info[type].text;
- current={name:type,price:info[type].price};
-}
-
-function addToCart(){
- if(!current) return;
- cart.push(current);
- document.getElementById('cartCount').innerText=cart.length;
+function addToCart(name,price){
+ cart.push({name,price});
+ document.getElementById('count').innerText=cart.length;
 }
 
 function openCart(){
  document.getElementById('products').style.display='none';
- document.getElementById('details').style.display='none';
  document.getElementById('home').style.display='none';
  document.getElementById('cartPage').style.display='block';
 
@@ -111,15 +86,16 @@ function openCart(){
  let total=0;
  cart.forEach((item,i)=>{
   total+=item.price;
-  html+=`<div class="cart-item">${item.name} - ${item.price} ريال <button onclick="removeItem(${i})">❌</button></div>`;
+  html+=`<div class="cart-item">${item.name} - ${item.price} KD <button onclick="removeItem(${i})">❌</button></div>`;
  });
- document.getElementById('cartItems').innerHTML=html;
- document.getElementById('total').innerText='المجموع: '+total+' ريال';
+
+ document.getElementById('items').innerHTML=html;
+ document.getElementById('total').innerText='المجموع: '+total+' KD';
 }
 
 function removeItem(i){
  cart.splice(i,1);
- document.getElementById('cartCount').innerText=cart.length;
+ document.getElementById('count').innerText=cart.length;
  openCart();
 }
 </script>
