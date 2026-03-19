@@ -4,184 +4,149 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NYC Store</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:'Poppins',sans-serif;background:#1f1f1f;color:#60a5fa}
+body{margin:0;font-family:'Cairo',sans-serif;background:#1f1f1f;color:#e5e7eb}
 
-/* NAVBAR ثابت */
-.nav{
- display:flex;
- justify-content:space-between;
- align-items:center;
- padding:15px 40px;
- position:fixed;
- top:0;
- width:100%;
- background:rgba(20,20,20,0.95);
- backdrop-filter:blur(10px);
- z-index:1000;
-}
+/* NAV */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 40px;position:fixed;top:0;width:100%;background:#111;z-index:1000}
 .logo{font-weight:700;font-size:20px}
-
-.cart{position:relative;cursor:pointer;font-size:20px}
+.cart{position:relative;cursor:pointer}
 .cart span{position:absolute;top:-8px;right:-10px;background:red;color:#fff;font-size:12px;padding:2px 6px;border-radius:50%}
 
+/* HERO */
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:60px}
-.hero h1{font-size:55px}
-.hero span{color:#3b82f6}
+.hero h1{font-size:48px}
 
+/* CATEGORIES */
 .categories{display:flex;gap:20px;margin-top:20px}
-.cat{background:#2a2a2a;padding:20px 35px;border-radius:12px;cursor:pointer;transition:.3s}
-.cat:hover{transform:scale(1.08);background:#3a3a3a}
+.cat{background:#2a2a2a;padding:18px 28px;border-radius:12px;cursor:pointer;transition:.25s}
+.cat:hover{transform:translateY(-3px)}
 
-.products{display:none;grid-template-columns:repeat(2,1fr);gap:20px;max-width:600px;margin:120px auto}
-
-.card{background:#2a2a2a;border-radius:12px;overflow:hidden;transition:.3s}
-.card:hover{transform:translateY(-6px) scale(1.03)}
+/* PRODUCTS */
+.products{display:none;grid-template-columns:repeat(2,1fr);gap:20px;max-width:700px;margin:120px auto}
+.card{background:#2a2a2a;border-radius:12px;overflow:hidden;transition:.25s}
+.card:hover{transform:translateY(-6px)}
 .card img{width:100%;height:140px;object-fit:cover}
-.card-content{padding:10px;text-align:center}
-.price{color:#fff;font-size:14px;margin-top:5px}
+.card-content{text-align:center;padding:10px}
+.price{color:#60a5fa}
+.btn{background:#3b82f6;color:#fff;border:none;padding:6px 14px;border-radius:8px;cursor:pointer;margin-top:8px}
 
-/* زر مو طويل */
-.btn{
- background:#3b82f6;
- color:#fff;
- border:none;
- padding:8px 14px;
- border-radius:8px;
- cursor:pointer;
- margin-top:8px;
- display:inline-block;
-}
+/* DETAILS */
+.product-details{display:none;margin-top:120px;text-align:center;animation:fade .3s}
+.product-box{background:#2a2a2a;padding:20px;border-radius:15px;max-width:400px;margin:auto;text-align:right}
 
-.product-details{display:none;text-align:center;margin-top:120px}
-.product-box{background:#2a2a2a;padding:20px;border-radius:15px;max-width:300px;margin:auto}
-.product-box img{width:100%;border-radius:10px;margin-bottom:10px}
+/* CART */
+.cart-page{display:none;margin-top:120px;text-align:center;animation:fade .3s}
+.cart-item{background:#2a2a2a;margin:10px auto;padding:10px;border-radius:10px;max-width:320px;display:flex;justify-content:space-between;align-items:center}
+.total{margin-top:10px;color:#60a5fa;font-weight:bold}
 
-.cart-page{display:none;margin-top:120px;text-align:center}
-.cart-item{background:#2a2a2a;margin:10px auto;padding:10px;border-radius:10px;max-width:300px;display:flex;justify-content:space-between}
+/* REVIEW */
+.review-container{position:fixed;bottom:20px;left:20px}
+.review{background:#2a2a2a;padding:10px;border-radius:12px;width:200px}
+.review img{width:40px;height:40px;border-radius:50%}
+.review .name{font-weight:600}
+.stars{color:gold}
 
-.review-container{position:fixed;bottom:20px;left:20px;width:220px;overflow:hidden}
-.review-track{display:flex;gap:10px;animation:slide 10s linear infinite}
-.review{min-width:220px;background:#2a2a2a;padding:10px;border-radius:12px;text-align:center}
-@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-230px)}}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-.tiktok{position:fixed;bottom:20px;right:20px;background:#2a2a2a;padding:10px;border-radius:12px}
-.tiktok img{width:35px}
+.added{animation:pop .3s}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
 </style>
 </head>
 <body>
 
 <div class="nav">
-<div class="logo">NYC</div>
+<div class="logo">NYC Store</div>
 <div class="cart" onclick="openCart()">🛒<span id="cartCount">0</span></div>
 </div>
 
 <div class="hero" id="home">
-<h1>اشتراكات رقمية <br><span>بمستوى فاخر</span></h1>
-<p>أفضل جودة - تسليم سريع</p>
+<h1>اشتراكات رقمية فاخرة</h1>
 <div class="categories">
 <div class="cat" onclick="showSection('subs')">الحسابات</div>
-<div class="cat" onclick="showSection('profiles')">الملفات</div>
 </div>
 </div>
 
+<!-- PRODUCTS -->
 <div class="products" id="subs">
-<div class="card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg">
-<div class="card-content">
-Netflix
-<div class="price">3 KD</div>
-<button class="btn" onclick="openDetails('Netflix','اشتراك كامل 4K','3','https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg')">التفاصيل</button>
-</div>
+<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/OSN_logo.png"><div class="card-content">OSN<div class="price">15 ريال</div><button class="btn" onclick="openDetails('osn')">التفاصيل</button></div></div>
+<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"><div class="card-content">Netflix<div class="price">14 ريال</div><button class="btn" onclick="openDetails('netflix')">التفاصيل</button></div></div>
+<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png"><div class="card-content">Prime<div class="price">12 ريال</div><button class="btn" onclick="openDetails('prime')">التفاصيل</button></div></div>
+<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Shahid_logo.svg"><div class="card-content">Shahid<div class="price">24 ريال</div><button class="btn" onclick="openDetails('shahid')">التفاصيل</button></div></div>
+<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"><div class="card-content">YouTube<div class="price">12 ريال</div><button class="btn" onclick="openDetails('youtube')">التفاصيل</button></div></div>
 </div>
 
-<div class="card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/OSN_logo.png">
-<div class="card-content">
-OSN
-<div class="price">3 KD</div>
-<button class="btn" onclick="openDetails('OSN','اشتراك كامل','3','https://upload.wikimedia.org/wikipedia/commons/3/3f/OSN_logo.png')">التفاصيل</button>
-</div>
-</div>
-</div>
-
-<div class="products" id="profiles">
-<div class="card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png">
-<div class="card-content">Prime Profile<div class="price">1 KD</div>
-<button class="btn" onclick="openDetails('Prime Profile','ملف واحد','1','https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png')">التفاصيل</button></div>
-</div>
-</div>
-
+<!-- DETAILS -->
 <div class="product-details" id="details">
-<div class="product-box">
-<img id="pimg">
-<h2 id="pname"></h2>
-<p id="pdesc"></p>
-<p id="pprice"></p>
+<div class="product-box" id="detailsContent"></div>
 <button class="btn" onclick="addToCart()">إضافة للسلة</button>
 </div>
-</div>
 
+<!-- CART -->
 <div class="cart-page" id="cartPage">
 <h2>السلة</h2>
 <div id="cartItems"></div>
+<div class="total" id="total"></div>
 <button class="btn">شراء</button>
 </div>
 
+<!-- REVIEW -->
 <div class="review-container">
-<div class="review-track">
-<div class="review">ما قصروا ⭐⭐⭐⭐⭐</div>
-<div class="review">سريع ⭐⭐⭐⭐⭐</div>
-<div class="review">ممتاز ⭐⭐⭐⭐⭐</div>
+<div class="review">
+<img src="https://i.pravatar.cc/40">
+<div class="name">محمد</div>
+<div class="stars">★★★★★</div>
+<p>ما قصروا</p>
 </div>
-</div>
-
-<div class="tiktok">
-<a href="https://www.tiktok.com/@f.0aha" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png">
-</a>
 </div>
 
 <script>
 let cart=[];
-let currentProduct={};
+let current={};
+
+const prices={osn:15,netflix:14,prime:12,shahid:24,youtube:12};
+
+const data={
+osn:`اشتراك OSN\nحساب شهري 15 ريال\nملف خاص 6 ريال`,
+netflix:`اشتراك نتفلكس\nحساب شهر 14 ريال\nملف خاص 6 ريال`,
+prime:`اشتراك برايم\nحساب شهر 12 ريال\nملف خاص 6 ريال`,
+shahid:`شاهد شامل\nحساب شهر 24 ريال\nملف خاص 1 دينار`,
+youtube:`يوتيوب\n12 ريال`
+};
 
 function showSection(id){
- document.getElementById('subs').style.display='none';
- document.getElementById('profiles').style.display='none';
+ document.getElementById('subs').style.display='grid';
  document.getElementById('details').style.display='none';
  document.getElementById('cartPage').style.display='none';
- document.getElementById(id).style.display='grid';
 }
 
-function openDetails(name,desc,price,img){
+function openDetails(type){
  document.getElementById('subs').style.display='none';
- document.getElementById('profiles').style.display='none';
  document.getElementById('details').style.display='block';
- document.getElementById('pname').innerText=name;
- document.getElementById('pdesc').innerText=desc;
- document.getElementById('pprice').innerText=price+' KD';
- document.getElementById('pimg').src=img;
- currentProduct={name,price};
+ document.getElementById('detailsContent').innerText=data[type];
+ current={name:type,price:prices[type]};
 }
 
 function addToCart(){
- cart.push(currentProduct);
- document.getElementById('cartCount').innerText=cart.length;
+ cart.push(current);
+ const c=document.getElementById('cartCount');
+ c.innerText=cart.length;
+ c.classList.add('added');
+ setTimeout(()=>c.classList.remove('added'),300);
 }
 
 function openCart(){
  document.getElementById('subs').style.display='none';
- document.getElementById('profiles').style.display='none';
  document.getElementById('details').style.display='none';
  document.getElementById('cartPage').style.display='block';
- let list='';
- cart.forEach((i,index)=>{
-  list+=`<div class="cart-item">${i.name} - ${i.price} KD <button onclick="removeItem(${index})">❌</button></div>`;
+ let html='';let total=0;
+ cart.forEach((item,index)=>{
+ total+=item.price;
+ html+=`<div class="cart-item">${item.name} - ${item.price} ريال <button onclick="removeItem(${index})">❌</button></div>`;
  });
- document.getElementById('cartItems').innerHTML=list;
+ document.getElementById('cartItems').innerHTML=html;
+ document.getElementById('total').innerText='المجموع: '+total+' ريال';
 }
 
 function removeItem(i){
