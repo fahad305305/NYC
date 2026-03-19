@@ -1,153 +1,151 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-
-export default function Home() {
-  const [page, setPage] = useState("home");
-  const [cart, setCart] = useState([]);
-
-  const products = [
-    { name: "Netflix", price: "3 KD", desc: "4K + جميع الدول", img: "https://images.unsplash.com/photo-1581905764498-f1b60bae941a" },
-    { name: "Prime Video", price: "2 KD", desc: "أفلام ومسلسلات", img: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db" },
-    { name: "Shahid", price: "2.5 KD", desc: "محتوى عربي", img: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf" },
-    { name: "OSN", price: "3 KD", desc: "أحدث العروض", img: "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4" }
-  ];
-
-  const reviews = Array(10).fill({
-    name: "عميل",
-    text: "ما قصروا وتسليم سريع",
-    stars: 5
-  });
-
-  const addToCart = (item) => setCart([...cart, item]);
-
-  return (
-    <div className="bg-black text-white min-h-screen font-sans overflow-x-hidden">
-
-      {/* NAVBAR */}
-      <div className="flex justify-between items-center px-10 py-6 backdrop-blur-lg bg-white/5 border-b border-white/10 fixed w-full z-50">
-        <h1 className="text-2xl font-bold tracking-widest">NYC STORE</h1>
-        <div className="flex gap-8 text-sm">
-          <button onClick={() => setPage("home")} className="hover:text-gray-300">Home</button>
-          <button onClick={() => setPage("subs")} className="hover:text-gray-300">Products</button>
-          <button className="hover:text-gray-300">Contact</button>
-        </div>
-        <div className="text-sm">Cart ({cart.length})</div>
-      </div>
-
-      {/* HERO */}
-      {page === "home" && (
-        <>
-          <div className="relative h-screen flex items-center justify-center text-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 to-blue-900/40 blur-3xl" />
-
-            <motion.div
-              initial={{ opacity: 0, y: 80 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              className="relative z-10"
-            >
-              <h2 className="text-6xl md:text-7xl font-extrabold leading-tight">
-                اشتراكات رقمية
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-                  بشكل فاخر
-                </span>
-              </h2>
-
-              <p className="text-gray-400 mt-6 max-w-xl mx-auto">
-                تجربة مختلفة بالكامل — سرعة، جودة، وثقة
-              </p>
-
-              <button
-                onClick={() => setPage("subs")}
-                className="mt-8 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 hover:scale-105 transition"
-              >
-                تصفح المنتجات
-              </button>
-            </motion.div>
-          </div>
-
-          {/* ABOUT */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-3xl mx-auto py-24"
-          >
-            <h3 className="text-3xl mb-4">من نحن</h3>
-            <p className="text-gray-400">
-              نقدم اشتراكات رقمية بتجربة فاخرة وتصميم حديث يواكب أفضل المواقع العالمية.
-            </p>
-          </motion.div>
-
-          {/* CATEGORIES */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto py-20 px-6">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              onClick={() => setPage("subs")}
-              className="bg-gradient-to-br from-white/10 to-white/5 p-12 rounded-3xl backdrop-blur-xl cursor-pointer border border-white/10"
-            >
-              <h3 className="text-2xl">الحسابات الشهرية</h3>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-br from-white/10 to-white/5 p-12 rounded-3xl backdrop-blur-xl border border-white/10"
-            >
-              <h3 className="text-2xl">الملفات الشخصية</h3>
-            </motion.div>
-          </div>
-
-          {/* REVIEWS */}
-          <div className="overflow-hidden py-16">
-            <motion.div
-              className="flex gap-8"
-              animate={{ x: [0, -2000] }}
-              transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-            >
-              {[...reviews, ...reviews].map((r, i) => (
-                <div key={i} className="bg-white/5 backdrop-blur-lg p-6 rounded-2xl min-w-[280px] border border-white/10">
-                  <h4 className="font-bold">{r.name}</h4>
-                  <p className="text-gray-400">{r.text}</p>
-                  <div className="mt-2 tracking-widest">★★★★★</div>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        </>
-      )}
-
-      {/* PRODUCTS */}
-      {page === "subs" && (
-        <div className="max-w-7xl mx-auto py-32 px-6">
-          <button onClick={() => setPage("home")} className="mb-10 text-gray-400">← رجوع</button>
-
-          <h2 className="text-5xl mb-16 font-bold">الباقات</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {products.map((p, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden"
-              >
-                <img src={p.img} className="w-full h-48 object-cover" />
-                <div className="p-6">
-                  <h3 className="text-xl mb-1">{p.name}</h3>
-                  <p className="text-gray-400">{p.desc}</p>
-                  <p className="mt-3 font-bold">{p.price}</p>
-                  <button
-                    onClick={() => addToCart(p)}
-                    className="mt-4 w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600"
-                  >
-                    إضافة للسلة
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NYC Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #050505;
+  color: white;
 }
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 60px;
+}
+
+.hero span {
+  background: linear-gradient(90deg, #6a5cff, #00c6ff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.btn {
+  padding: 15px 30px;
+  background: linear-gradient(90deg,#6a5cff,#00c6ff);
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.section {
+  padding: 100px 40px;
+  text-align: center;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 15px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.reviews {
+  display: flex;
+  gap: 20px;
+  animation: scroll 20s linear infinite;
+}
+
+.review {
+  min-width: 200px;
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <h2>NYC STORE</h2>
+  <div>Products | Contact</div>
+</div>
+
+<div class="hero">
+  <div>
+    <h1>اشتراكات رقمية <br><span>بمستوى فاخر</span></h1>
+    <p>جودة عالية - تسليم فوري</p>
+    <button class="btn">تصفح المنتجات</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>الباقات</h2>
+  <div class="products">
+    <div class="card">
+      <h3>Netflix</h3>
+      <p>4K + جميع الدول</p>
+      <button class="btn">إضافة للسلة</button>
+    </div>
+
+    <div class="card">
+      <h3>Prime Video</h3>
+      <p>أفلام ومسلسلات</p>
+      <button class="btn">إضافة للسلة</button>
+    </div>
+
+    <div class="card">
+      <h3>Shahid</h3>
+      <p>محتوى عربي</p>
+      <button class="btn">إضافة للسلة</button>
+    </div>
+
+    <div class="card">
+      <h3>OSN</h3>
+      <p>أحدث العروض</p>
+      <button class="btn">إضافة للسلة</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>آراء العملاء</h2>
+  <div class="reviews">
+    <div class="review">ما قصروا ⭐⭐⭐⭐⭐</div>
+    <div class="review">تسليم سريع ⭐⭐⭐⭐⭐</div>
+    <div class="review">خدمة ممتازة ⭐⭐⭐⭐⭐</div>
+    <div class="review">تعامل راقي ⭐⭐⭐⭐⭐</div>
+    <div class="review">أفضل متجر ⭐⭐⭐⭐⭐</div>
+  </div>
+</div>
+
+</body>
+</html>
