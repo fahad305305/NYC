@@ -1,116 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>NYC Store</title>
-  <style>
-    body {
-      background: #0a0a23;
-      color: #eee;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .header h1 {
-      color: #5865F2;
-      font-size: 3em;
-    }
-    .header img {
-      width: 120px;
-      height: auto;
-      margin-top: 10px;
-    }
-    .products-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-    .product {
-      background: #292b6e;
-      padding: 20px;
-      border-radius: 10px;
-      width: 300px;
-      text-align: center;
-      color: #fff;
-      box-shadow: 0 0 10px #444;
-      flex: 1 1 calc(45% - 40px);
-    }
-    .product h2 {
-      margin-bottom: 10px;
-    }
-    .product p {
-      font-size: 1.2em;
-    }
-    .buy-button {
-      background: #25d366;
-      color: white;
-      padding: 10px 20px;
-      display: inline-block;
-      text-decoration: none;
-      margin-top: 10px;
-      border-radius: 5px;
-      transition: background 0.3s ease;
-    }
-    .buy-button:hover {
-      background: #1fa055;
-    }
-  </style>
-</head>
-<body>
-  <div class="header">
-    <h1>NYC Store</h1>
-    <p>نحن متجر إلكتروني متخصص في توفير اشتراكات جميع المنصات الرقمية بأسعار مميزة ومنافسة.
-نوفر اشتراكات أصلية وموثوقة مع تسليم سريع ودعم مستمر لضمان أفضل تجربة لعملائن</p>
-    <img src="https://cdn.discordapp.com/attachments/1279907327046062161/1481580866294644806/NYC-Emblem-removebg-preview.png?ex=69b3d534&is=69b283b4&hm=f5b7aafd921acf4fb4f7ec0298eb5a83098e07b0db9b034bc53c88d3f0604576&">
-  </div>
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
-  <div class="products-container">
-    <div class="product">
-      <h2>OSN+ | شهر  </h2>
-      <p>السعر: 13.99 ريال</p>
-      <a href="https://wa.me/96565798061?text=أبي%20أشتري%20اشتراك%20شهر" class="buy-button">اطلب عبر واتساب</a>
-    </div>
+export default function Home() {
+  const [page, setPage] = useState("home");
+  const [cart, setCart] = useState([]);
 
-    <div class="product">
-      <h2>Netflix | شهر </h2>
-      <p>السعر: 12.99 ريال</p>
-      <a href="https://wa.me/96565798061?text=أبي%20أشتري%2014%20بوست%20شهر" class="buy-button">اطلب عبر واتساب</a>
-    </div>
+  const reviews = [
+    { name: "محمد", text: "ما قصروا، تسليم سريع", stars: 5 },
+    { name: "أحمد", text: "خدمة ممتازة", stars: 5 },
+    { name: "سعود", text: "مرتب وسريع", stars: 4 },
+    { name: "ناصر", text: "تعامل راقي", stars: 5 },
+    { name: "فهد", text: "أفضل متجر", stars: 5 },
+    { name: "عبدالله", text: "سريع بالتنفيذ", stars: 5 },
+    { name: "خالد", text: "أنصح فيه", stars: 4 },
+    { name: "يوسف", text: "شغل نظيف", stars: 5 },
+    { name: "حسين", text: "مره ممتاز", stars: 5 },
+    { name: "جاسم", text: "تعامل سريع", stars: 5 },
+  ];
 
-    <div class="product">
-      <h2>Shahid MBC | شهر مسلسلات</h2>
-      <p>السعر: 6 ريال</p>
-      <a href="https://wa.me/96565798061?text=أبي%20أطلب%20اختصارات" class="buy-button">اطلب عبر واتساب</a>
-    </div>
+  const subscriptions = [
+    { name: "Netflix", price: "3 KD", desc: "جودة عالية + كل الدول" },
+    { name: "Prime Video", price: "2 KD", desc: "أفلام ومسلسلات" },
+    { name: "Shahid", price: "2.5 KD", desc: "محتوى عربي مميز" },
+    { name: "OSN", price: "3 KD", desc: "أحدث المسلسلات" },
+  ];
 
-    <div class="product">
-      <h2>Shahid MBC | شهر رياضيه</h2>
-      <p>السعر: 9 ريال</p>
-      <a href="https://wa.me/96565798061?text=أبي%20أطلب%20أفكت" class="buy-button">اطلب عبر واتساب</a>
-    </div>
+  const addToCart = (item) => {
+    setCart([...cart, item]);
+  };
 
-    <div class="product">
-      <h2>شهر | نور بلاي</h2>
-      <p>السعر: 6 ريال</p>
-      <a href="https://wa.me/96565798061?text=أبي%20أطلب%20ديكوريشن" class="buy-button">اطلب عبر واتساب</a>
-    </div>
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-blue-900 to-red-900 text-white font-sans">
+      {/* Header */}
+      <div className="flex justify-between p-6">
+        <h1 className="text-2xl font-bold">Mo Store</h1>
+        <Button onClick={() => alert("السلة: " + cart.length)}>السلة ({cart.length})</Button>
+      </div>
 
-    <div class="product">
-      <h2>Prime Vedio | شهر </h2>
-      <p>السعر: 6 ريال</p>
-      <a href="https://wa.me/96565798061?text=أبي%20أطلب%20ديكوريشن" class="buy-button">اطلب عبر واتساب</a>
-    </div>
+      {/* HOME */}
+      {page === "home" && (
+        <>
+          <div className="text-center py-16">
+            <h2 className="text-4xl font-bold mb-4">متجر الاشتراكات</h2>
+            <p className="opacity-80">أفضل الأسعار + تسليم سريع</p>
+          </div>
 
-    <div class="product">
-      <h2>شهر | فاصل بلس</h2>
-      <p>السعر: 6 ريال</p>
-      <a href="https://wa.me/96565798061?text=أبي%20أطلب%20أداة%20نسخ" class="buy-button">اطلب عبر واتساب</a>
+          <div className="max-w-4xl mx-auto text-center py-6">
+            <h3 className="text-2xl mb-3">من نحن</h3>
+            <p className="opacity-80">نوفر أفضل الاشتراكات والملفات الشخصية بجودة عالية وسرعة.</p>
+          </div>
+
+          {/* Categories */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto py-10">
+            <Card className="bg-white text-black rounded-2xl">
+              <CardContent className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-3">الحسابات الشهرية</h3>
+                <Button onClick={() => setPage("subs")} className="w-full">تصفح</Button>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white text-black rounded-2xl">
+              <CardContent className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-3">الملفات الشخصية</h3>
+                <Button onClick={() => setPage("profiles")} className="w-full">تصفح</Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Reviews */}
+          <div className="overflow-hidden py-10">
+            <motion.div
+              className="flex gap-6"
+              animate={{ x: [0, -1000] }}
+              transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+            >
+              {[...reviews, ...reviews].map((r, i) => (
+                <Card key={i} className="min-w-[250px] bg-white text-black rounded-2xl">
+                  <CardContent className="p-4">
+                    <h4 className="font-bold">{r.name}</h4>
+                    <p className="text-sm opacity-70">{r.text}</p>
+                    <div className="flex mt-2">
+                      {Array.from({ length: r.stars }).map((_, i) => (
+                        <span key={i}>★</span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </motion.div>
+          </div>
+        </>
+      )}
+
+      {/* SUBSCRIPTIONS */}
+      {page === "subs" && (
+        <div className="max-w-5xl mx-auto py-10">
+          <Button onClick={() => setPage("home")} className="mb-6">رجوع</Button>
+          <h2 className="text-3xl mb-6">الباقات</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {subscriptions.map((item, i) => (
+              <Card key={i} className="bg-white text-black rounded-2xl">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold">{item.name}</h3>
+                  <p className="opacity-70">{item.desc}</p>
+                  <p className="mt-2 font-bold">{item.price}</p>
+                  <Button onClick={() => addToCart(item)} className="mt-4 w-full">إضافة إلى السلة</Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* PROFILES */}
+      {page === "profiles" && (
+        <div className="max-w-5xl mx-auto py-10">
+          <Button onClick={() => setPage("home")} className="mb-6">رجوع</Button>
+          <h2 className="text-3xl mb-6">الملفات الشخصية</h2>
+          <p>نفس فكرة الاشتراكات (تقدر تضيف منتجات هنا)</p>
+        </div>
+      )}
     </div>
-  </div>
-</body>
-</html>
+  );
+}
