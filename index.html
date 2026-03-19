@@ -7,97 +7,125 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 body{margin:0;font-family:'Poppins',sans-serif;background:#050505;color:#fff}
-.nav{display:flex;justify-content:space-between;padding:20px 40px;position:fixed;width:100%;background:rgba(0,0,0,.5);backdrop-filter:blur(10px)}
+.nav{display:flex;justify-content:space-between;padding:20px 40px;position:fixed;width:100%;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);z-index:100}
+.nav h2{margin:0}
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero h1{font-size:60px}
 .hero span{background:linear-gradient(90deg,#6a5cff,#00c6ff);-webkit-background-clip:text;color:transparent}
-.section{padding:80px 20px;text-align:center}
-.categories{display:flex;gap:20px;justify-content:center;margin-top:30px}
-.cat{background:#111;padding:40px;border-radius:15px;cursor:pointer;font-size:20px}
+.section{padding:100px 20px;text-align:center}
+.categories{display:flex;gap:20px;justify-content:center;margin-top:40px}
+.cat{background:#111;padding:40px 60px;border-radius:20px;cursor:pointer;font-size:22px;transition:.3s}
+.cat:hover{transform:scale(1.08)}
 .products{display:none;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.card{background:#111;padding:20px;border-radius:15px;cursor:pointer}
-.review-box{width:300px;margin:auto}
+.card{background:#111;padding:20px;border-radius:15px;cursor:pointer;transition:.3s}
+.card:hover{transform:translateY(-8px)}
+.review-container{overflow:hidden;width:300px;margin:auto}
+.review-track{display:flex;animation:scroll 10s linear infinite}
+.review{min-width:300px;text-align:center}
 .star{color:gold;font-size:18px}
-.cart{position:fixed;bottom:20px;right:20px;background:#111;padding:15px;border-radius:10px}
-.hidden{display:none}
+.cart-page{display:none;padding:100px 20px}
+.btn{padding:10px 20px;background:linear-gradient(90deg,#6a5cff,#00c6ff);border:none;border-radius:10px;color:#fff;cursor:pointer}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-300px)}}
 </style>
 </head>
 <body>
 
 <div class="nav">
 <h2>NYC</h2>
-<div id="cart">🛒 0</div>
+<div>
+<button onclick="showSection('subs')">الحسابات</button>
+<button onclick="showSection('profiles')">الملفات</button>
+<span onclick="openCart()" style="cursor:pointer">🛒 <span id="cartCount">0</span></span>
+</div>
 </div>
 
 <div class="hero">
 <h1>اشتراكات رقمية<br><span>بمستوى فاخر</span></h1>
 <p>جودة عالية - تسليم فوري</p>
-
-<div class="categories">
-<div class="cat" onclick="showProducts('subs')">الحسابات الشهرية</div>
-<div class="cat" onclick="showProducts('profiles')">الملفات الشخصية</div>
-</div>
 </div>
 
 <div class="section">
 <h2>من نحن</h2>
 <p>متجر يوفر اشتراكات رقمية بسرعة وجودة عالية وتجربة فاخرة.</p>
+
+<div class="categories">
+<div class="cat" onclick="showSection('subs')">الحسابات الشهرية</div>
+<div class="cat" onclick="showSection('profiles')">الملفات الشخصية</div>
+</div>
 </div>
 
 <div class="section products" id="subs">
-<h2>الباقات</h2>
+<h2>الحسابات</h2>
 <div class="card" onclick="openProduct('Netflix','4K + جميع الدول','3 KD')">Netflix</div>
 <div class="card" onclick="openProduct('Prime','أفلام ومسلسلات','2 KD')">Prime</div>
-<div class="card" onclick="openProduct('Shahid','محتوى عربي','2.5 KD')">Shahid</div>
-<div class="card" onclick="openProduct('OSN','أحدث العروض','3 KD')">OSN</div>
 </div>
 
-<div class="section hidden" id="productPage">
+<div class="section products" id="profiles">
+<h2>الملفات</h2>
+<div class="card" onclick="openProduct('Profile 1','ملف شخصي','1 KD')">Profile 1</div>
+<div class="card" onclick="openProduct('Profile 2','ملف شخصي','1 KD')">Profile 2</div>
+</div>
+
+<div class="section" id="productPage" style="display:none">
 <h2 id="pname"></h2>
 <p id="pdesc"></p>
 <p id="pprice"></p>
-<button onclick="addToCart()">إضافة للسلة</button>
+<button class="btn" onclick="addToCart()">إضافة للسلة</button>
 </div>
 
 <div class="section">
 <h2>تقييم العملاء</h2>
-<div class="review-box" id="review"></div>
+<div class="review-container">
+<div class="review-track">
+<div class="review">ما قصروا ⭐⭐⭐⭐⭐</div>
+<div class="review">تسليم سريع ⭐⭐⭐⭐⭐</div>
+<div class="review">خدمة ممتازة ⭐⭐⭐⭐⭐</div>
+<div class="review">تعامل راقي ⭐⭐⭐⭐⭐</div>
+</div>
+</div>
+</div>
+
+<div class="cart-page" id="cartPage">
+<h2>السلة</h2>
+<ul id="cartItems"></ul>
+<button class="btn">الدفع</button>
 </div>
 
 <script>
-let cart=0;
+let cart=[];
 let currentProduct={};
 
-function showProducts(type){
- document.getElementById('subs').style.display='grid';
+function showSection(id){
+ document.getElementById('subs').style.display='none';
+ document.getElementById('profiles').style.display='none';
+ document.getElementById('cartPage').style.display='none';
+ document.getElementById(id).style.display='grid';
 }
 
 function openProduct(name,desc,price){
- document.getElementById('productPage').classList.remove('hidden');
+ document.getElementById('productPage').style.display='block';
  document.getElementById('pname').innerText=name;
  document.getElementById('pdesc').innerText=desc;
  document.getElementById('pprice').innerText=price;
- currentProduct={name};
+ currentProduct={name,price};
  window.scrollTo(0,document.body.scrollHeight);
 }
 
 function addToCart(){
- cart++;
- document.getElementById('cart').innerText='🛒 '+cart;
+ cart.push(currentProduct);
+ document.getElementById('cartCount').innerText=cart.length;
 }
 
-const reviews=[
-'ما قصروا ⭐⭐⭐⭐⭐',
-'تسليم سريع ⭐⭐⭐⭐⭐',
-'خدمة ممتازة ⭐⭐⭐⭐⭐',
-'تعامل راقي ⭐⭐⭐⭐⭐'
-];
-
-let i=0;
-setInterval(()=>{
- document.getElementById('review').innerText=reviews[i];
- i=(i+1)%reviews.length;
-},2000);
+function openCart(){
+ document.getElementById('cartPage').style.display='block';
+ document.getElementById('subs').style.display='none';
+ document.getElementById('profiles').style.display='none';
+ let list='';
+ cart.forEach(item=>{
+  list+=`<li>${item.name} - ${item.price}</li>`;
+ });
+ document.getElementById('cartItems').innerHTML=list;
+}
 </script>
 
 </body>
