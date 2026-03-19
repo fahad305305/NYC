@@ -8,13 +8,25 @@
 <style>
 body{margin:0;font-family:'Poppins',sans-serif;background:#1f1f1f;color:#60a5fa}
 
-.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 40px;position:fixed;width:100%;background:rgba(20,20,20,0.9);backdrop-filter:blur(10px);z-index:1000}
+/* NAVBAR ثابت */
+.nav{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:15px 40px;
+ position:fixed;
+ top:0;
+ width:100%;
+ background:rgba(20,20,20,0.95);
+ backdrop-filter:blur(10px);
+ z-index:1000;
+}
 .logo{font-weight:700;font-size:20px}
 
 .cart{position:relative;cursor:pointer;font-size:20px}
 .cart span{position:absolute;top:-8px;right:-10px;background:red;color:#fff;font-size:12px;padding:2px 6px;border-radius:50%}
 
-.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:60px}
 .hero h1{font-size:55px}
 .hero span{color:#3b82f6}
 
@@ -22,7 +34,7 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#1f1f1f;color:#60a5fa}
 .cat{background:#2a2a2a;padding:20px 35px;border-radius:12px;cursor:pointer;transition:.3s}
 .cat:hover{transform:scale(1.08);background:#3a3a3a}
 
-.products{display:none;grid-template-columns:repeat(2,1fr);gap:20px;max-width:600px;margin:100px auto}
+.products{display:none;grid-template-columns:repeat(2,1fr);gap:20px;max-width:600px;margin:120px auto}
 
 .card{background:#2a2a2a;border-radius:12px;overflow:hidden;transition:.3s}
 .card:hover{transform:translateY(-6px) scale(1.03)}
@@ -30,12 +42,23 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#1f1f1f;color:#60a5fa}
 .card-content{padding:10px;text-align:center}
 .price{color:#fff;font-size:14px;margin-top:5px}
 
-.btn{background:#3b82f6;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;margin-top:8px}
+/* زر مو طويل */
+.btn{
+ background:#3b82f6;
+ color:#fff;
+ border:none;
+ padding:8px 14px;
+ border-radius:8px;
+ cursor:pointer;
+ margin-top:8px;
+ display:inline-block;
+}
 
-.product-details{display:none;text-align:center;margin-top:100px}
+.product-details{display:none;text-align:center;margin-top:120px}
 .product-box{background:#2a2a2a;padding:20px;border-radius:15px;max-width:300px;margin:auto}
+.product-box img{width:100%;border-radius:10px;margin-bottom:10px}
 
-.cart-page{display:none;margin-top:100px;text-align:center}
+.cart-page{display:none;margin-top:120px;text-align:center}
 .cart-item{background:#2a2a2a;margin:10px auto;padding:10px;border-radius:10px;max-width:300px;display:flex;justify-content:space-between}
 
 .review-container{position:fixed;bottom:20px;left:20px;width:220px;overflow:hidden}
@@ -69,7 +92,7 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#1f1f1f;color:#60a5fa}
 <div class="card-content">
 Netflix
 <div class="price">3 KD</div>
-<button class="btn" onclick="openDetails('Netflix','اشتراك كامل 4K','3')">التفاصيل</button>
+<button class="btn" onclick="openDetails('Netflix','اشتراك كامل 4K','3','https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg')">التفاصيل</button>
 </div>
 </div>
 
@@ -78,25 +101,7 @@ Netflix
 <div class="card-content">
 OSN
 <div class="price">3 KD</div>
-<button class="btn" onclick="openDetails('OSN','اشتراك كامل','3')">التفاصيل</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png">
-<div class="card-content">
-Prime
-<div class="price">2 KD</div>
-<button class="btn" onclick="openDetails('Prime','اشتراك','2')">التفاصيل</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Shahid_logo.svg">
-<div class="card-content">
-Shahid
-<div class="price">2.5 KD</div>
-<button class="btn" onclick="openDetails('Shahid','اشتراك','2.5')">التفاصيل</button>
+<button class="btn" onclick="openDetails('OSN','اشتراك كامل','3','https://upload.wikimedia.org/wikipedia/commons/3/3f/OSN_logo.png')">التفاصيل</button>
 </div>
 </div>
 </div>
@@ -105,18 +110,13 @@ Shahid
 <div class="card">
 <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png">
 <div class="card-content">Prime Profile<div class="price">1 KD</div>
-<button class="btn" onclick="openDetails('Prime Profile','ملف واحد','1')">التفاصيل</button></div>
-</div>
-
-<div class="card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/OSN_logo.png">
-<div class="card-content">OSN Profile<div class="price">1 KD</div>
-<button class="btn" onclick="openDetails('OSN Profile','ملف واحد','1')">التفاصيل</button></div>
+<button class="btn" onclick="openDetails('Prime Profile','ملف واحد','1','https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png')">التفاصيل</button></div>
 </div>
 </div>
 
 <div class="product-details" id="details">
 <div class="product-box">
+<img id="pimg">
 <h2 id="pname"></h2>
 <p id="pdesc"></p>
 <p id="pprice"></p>
@@ -156,13 +156,14 @@ function showSection(id){
  document.getElementById(id).style.display='grid';
 }
 
-function openDetails(name,desc,price){
+function openDetails(name,desc,price,img){
  document.getElementById('subs').style.display='none';
  document.getElementById('profiles').style.display='none';
  document.getElementById('details').style.display='block';
  document.getElementById('pname').innerText=name;
  document.getElementById('pdesc').innerText=desc;
  document.getElementById('pprice').innerText=price+' KD';
+ document.getElementById('pimg').src=img;
  currentProduct={name,price};
 }
 
