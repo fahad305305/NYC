@@ -1,125 +1,130 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 export default function Home() {
   const [page, setPage] = useState("home");
   const [cart, setCart] = useState([]);
 
-  const reviews = [
-    { name: "محمد", text: "ما قصروا، تسليم سريع", stars: 5 },
-    { name: "أحمد", text: "خدمة ممتازة", stars: 5 },
-    { name: "سعود", text: "مرتب وسريع", stars: 4 },
-    { name: "ناصر", text: "تعامل راقي", stars: 5 },
-    { name: "فهد", text: "أفضل متجر", stars: 5 },
-    { name: "عبدالله", text: "سريع بالتنفيذ", stars: 5 },
-    { name: "خالد", text: "أنصح فيه", stars: 4 },
-    { name: "يوسف", text: "شغل نظيف", stars: 5 },
-    { name: "حسين", text: "مره ممتاز", stars: 5 },
-    { name: "جاسم", text: "تعامل سريع", stars: 5 },
+  const products = [
+    { name: "Netflix", price: "3 KD", desc: "4K + جميع الدول", img: "https://via.placeholder.com/300" },
+    { name: "Prime Video", price: "2 KD", desc: "أفلام ومسلسلات", img: "https://via.placeholder.com/300" },
+    { name: "Shahid", price: "2.5 KD", desc: "محتوى عربي", img: "https://via.placeholder.com/300" },
+    { name: "OSN", price: "3 KD", desc: "أحدث العروض", img: "https://via.placeholder.com/300" }
   ];
 
-  const subscriptions = [
-    { name: "Netflix", price: "3 KD", desc: "جودة عالية + كل الدول" },
-    { name: "Prime Video", price: "2 KD", desc: "أفلام ومسلسلات" },
-    { name: "Shahid", price: "2.5 KD", desc: "محتوى عربي مميز" },
-    { name: "OSN", price: "3 KD", desc: "أحدث المسلسلات" },
-  ];
+  const reviews = Array(10).fill({
+    name: "عميل",
+    text: "ما قصروا وتسليم سريع",
+    stars: 5
+  });
 
-  const addToCart = (item) => {
-    setCart([...cart, item]);
-  };
+  const addToCart = (item) => setCart([...cart, item]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-900 to-red-900 text-white font-sans">
-      {/* Header */}
-      <div className="flex justify-between p-6">
+    <div className="bg-black text-white min-h-screen font-sans">
+
+      {/* NAVBAR */}
+      <div className="flex justify-between items-center px-8 py-5 border-b border-gray-800">
         <h1 className="text-2xl font-bold">Mo Store</h1>
-        <Button onClick={() => alert("السلة: " + cart.length)}>السلة ({cart.length})</Button>
+        <div className="flex gap-6">
+          <button onClick={() => setPage("home")}>Home</button>
+          <button onClick={() => setPage("subs")}>Products</button>
+          <button>Contact</button>
+        </div>
+        <div>🛒 {cart.length}</div>
       </div>
 
-      {/* HOME */}
+      {/* HERO */}
       {page === "home" && (
         <>
-          <div className="text-center py-16">
-            <h2 className="text-4xl font-bold mb-4">متجر الاشتراكات</h2>
-            <p className="opacity-80">أفضل الأسعار + تسليم سريع</p>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-center py-32"
+          >
+            <h2 className="text-6xl font-bold mb-6">اشتراكات رقمية فاخرة</h2>
+            <p className="text-gray-400 mb-6">أفضل جودة + تسليم فوري</p>
+            <button
+              onClick={() => setPage("subs")}
+              className="bg-white text-black px-6 py-3 rounded-xl"
+            >
+              تصفح الآن
+            </button>
+          </motion.div>
+
+          {/* ABOUT */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-center max-w-3xl mx-auto py-16"
+          >
+            <h3 className="text-3xl mb-4">من نحن</h3>
+            <p className="text-gray-400">
+              متجر متخصص في بيع الاشتراكات الرقمية بجودة عالية وسرعة في التسليم.
+            </p>
+          </motion.div>
+
+          {/* CATEGORIES */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto py-16">
+            <div
+              onClick={() => setPage("subs")}
+              className="bg-gray-900 p-10 rounded-2xl cursor-pointer hover:scale-105 transition"
+            >
+              <h3 className="text-2xl">الحسابات الشهرية</h3>
+            </div>
+            <div className="bg-gray-900 p-10 rounded-2xl cursor-pointer hover:scale-105 transition">
+              <h3 className="text-2xl">الملفات الشخصية</h3>
+            </div>
           </div>
 
-          <div className="max-w-4xl mx-auto text-center py-6">
-            <h3 className="text-2xl mb-3">من نحن</h3>
-            <p className="opacity-80">نوفر أفضل الاشتراكات والملفات الشخصية بجودة عالية وسرعة.</p>
-          </div>
-
-          {/* Categories */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto py-10">
-            <Card className="bg-white text-black rounded-2xl">
-              <CardContent className="p-6 text-center">
-                <h3 className="text-xl font-bold mb-3">الحسابات الشهرية</h3>
-                <Button onClick={() => setPage("subs")} className="w-full">تصفح</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white text-black rounded-2xl">
-              <CardContent className="p-6 text-center">
-                <h3 className="text-xl font-bold mb-3">الملفات الشخصية</h3>
-                <Button onClick={() => setPage("profiles")} className="w-full">تصفح</Button>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Reviews */}
+          {/* REVIEWS */}
           <div className="overflow-hidden py-10">
             <motion.div
               className="flex gap-6"
-              animate={{ x: [0, -1000] }}
-              transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+              animate={{ x: [0, -1500] }}
+              transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
             >
               {[...reviews, ...reviews].map((r, i) => (
-                <Card key={i} className="min-w-[250px] bg-white text-black rounded-2xl">
-                  <CardContent className="p-4">
-                    <h4 className="font-bold">{r.name}</h4>
-                    <p className="text-sm opacity-70">{r.text}</p>
-                    <div className="flex mt-2">
-                      {Array.from({ length: r.stars }).map((_, i) => (
-                        <span key={i}>★</span>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                <div key={i} className="bg-gray-900 p-6 rounded-xl min-w-[250px]">
+                  <h4>{r.name}</h4>
+                  <p className="text-gray-400">{r.text}</p>
+                  <div className="mt-2">★★★★★</div>
+                </div>
               ))}
             </motion.div>
           </div>
         </>
       )}
 
-      {/* SUBSCRIPTIONS */}
+      {/* PRODUCTS */}
       {page === "subs" && (
-        <div className="max-w-5xl mx-auto py-10">
-          <Button onClick={() => setPage("home")} className="mb-6">رجوع</Button>
-          <h2 className="text-3xl mb-6">الباقات</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {subscriptions.map((item, i) => (
-              <Card key={i} className="bg-white text-black rounded-2xl">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold">{item.name}</h3>
-                  <p className="opacity-70">{item.desc}</p>
-                  <p className="mt-2 font-bold">{item.price}</p>
-                  <Button onClick={() => addToCart(item)} className="mt-4 w-full">إضافة إلى السلة</Button>
-                </CardContent>
-              </Card>
+        <div className="max-w-6xl mx-auto py-16">
+          <button onClick={() => setPage("home")} className="mb-10">← رجوع</button>
+          <h2 className="text-4xl mb-10">الباقات</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {products.map((p, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.05 }}
+                className="bg-gray-900 rounded-2xl overflow-hidden"
+              >
+                <img src={p.img} className="w-full h-40 object-cover" />
+                <div className="p-6">
+                  <h3 className="text-xl">{p.name}</h3>
+                  <p className="text-gray-400">{p.desc}</p>
+                  <p className="mt-2">{p.price}</p>
+                  <button
+                    onClick={() => addToCart(p)}
+                    className="mt-4 w-full bg-white text-black py-2 rounded-lg"
+                  >
+                    إضافة للسلة
+                  </button>
+                </div>
+              </motion.div>
             ))}
           </div>
-        </div>
-      )}
-
-      {/* PROFILES */}
-      {page === "profiles" && (
-        <div className="max-w-5xl mx-auto py-10">
-          <Button onClick={() => setPage("home")} className="mb-6">رجوع</Button>
-          <h2 className="text-3xl mb-6">الملفات الشخصية</h2>
-          <p>نفس فكرة الاشتراكات (تقدر تضيف منتجات هنا)</p>
         </div>
       )}
     </div>
