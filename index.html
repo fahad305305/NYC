@@ -4,294 +4,221 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NYC Store</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
+body{margin:0;font-family:'Cairo',sans-serif;background:#1f1f1f;color:#e5e7eb;text-align:center}
 
-body{
- margin:0;
- font-family:'Cairo',sans-serif;
- background:#1f1f1f;
- color:#e5e7eb;
- text-align:center
-}
+h1{margin-top:30px;color:#3b82f6}
 
-h1{
- margin-top:30px;
- color:#3b82f6
-}
+.cart{position:fixed;top:20px;right:20px;background:#2a2a2a;padding:12px;border-radius:50%;cursor:pointer}
+.cart span{position:absolute;top:-5px;right:-5px;background:red;color:#fff;font-size:12px;padding:2px 6px;border-radius:50%}
 
-/* CART */
-.cart{
- position:fixed;
- top:20px;
- right:20px;
- background:#2a2a2a;
- padding:12px;
- border-radius:50%;
- cursor:pointer
-}
+.categories{display:flex;gap:15px;justify-content:center;margin-top:20px}
+.cat{background:#2a2a2a;padding:12px 20px;border-radius:10px;cursor:pointer;transition:.3s}
+.cat:hover{background:#3b82f6;transform:scale(1.08)}
 
-.cart span{
- position:absolute;
- top:-5px;
- right:-5px;
- background:red;
- color:#fff;
- font-size:12px;
- padding:2px 6px;
- border-radius:50%
-}
+.products{display:none;grid-template-columns:repeat(2,1fr);gap:15px;max-width:650px;margin:40px auto}
+.card{background:#2a2a2a;border-radius:12px;overflow:hidden}
+.card img{width:100%;height:150px;object-fit:cover}
+.card-content{padding:10px}
+.price{color:#60a5fa}
 
-/* CATEGORIES */
-.categories{
- display:flex;
- gap:15px;
- justify-content:center;
- margin-top:20px
-}
-
-.cat{
- background:#2a2a2a;
- padding:12px 20px;
- border-radius:10px;
- cursor:pointer;
- transition:.3s
-}
-
-.cat:hover{
- background:#3b82f6;
- transform:scale(1.08)
-}
-
-/* PRODUCTS */
-.products{
- display:none;
- grid-template-columns:repeat(2,1fr);
- gap:15px;
- max-width:650px;
- margin:40px auto
-}
-
-.card{
- background:#2a2a2a;
- border-radius:12px;
- overflow:hidden
-}
-
-.card img{
- width:100%;
- height:150px;
- object-fit:cover
-}
-
-.card-content{
- padding:10px
-}
-
-.price{
- color:#60a5fa
-}
-
-/* BUTTON */
 .btn{
  background:linear-gradient(135deg,#3b82f6,#2563eb);
  color:#fff;
  border:none;
- padding:10px 20px;
- border-radius:12px;
+ padding:10px 22px;
+ border-radius:14px;
  cursor:pointer;
  margin-top:10px;
- font-weight:600;
- letter-spacing:.5px;
+ font-weight:700;
+ letter-spacing:.6px;
  transition:.3s;
- box-shadow:0 0 10px rgba(59,130,246,.4)
+ box-shadow:0 0 12px rgba(59,130,246,.4);
+ animation:fadeUp .4s ease;
 }
-
+.btn:hover{
+ transform:scale(1.08);
+ box-shadow:0 0 25px rgba(59,130,246,.8);
+}
 .btn:hover{
  transform:scale(1.07);
- box-shadow:0 0 20px rgba(59,130,246,.7)
+ box-shadow:0 0 20px rgba(59,130,246,.7);
 }
 
-/* DETAILS */
-.details{
- display:none;
- margin-top:40px
-}
+.details{display:none;margin-top:40px}
+.box{background:#2a2a2a;padding:20px;border-radius:15px;max-width:400px;margin:auto;text-align:right}
+.box img{width:100%;border-radius:10px;margin-bottom:10px}
 
-.box{
- background:#2a2a2a;
- padding:20px;
- border-radius:15px;
- max-width:400px;
- margin:auto;
- text-align:right
-}
-
-.box img{
- width:100%;
- border-radius:10px;
- margin-bottom:10px
-}
-
-/* CART PAGE */
-.cart-page{
- display:none;
- margin-top:40px
-}
-
-.item{
- background:#2a2a2a;
- margin:10px auto;
- padding:10px;
- border-radius:10px;
- max-width:320px;
- display:flex;
- justify-content:space-between
-}
-
-.total{
- color:#3b82f6;
- margin-top:10px
-}
-
+.cart-page{display:none;margin-top:40px}
+.item{background:#2a2a2a;margin:10px auto;padding:10px;border-radius:10px;max-width:320px;display:flex;justify-content:space-between}
+.total{color:#3b82f6;margin-top:10px}
 .buy-btn{
  background:linear-gradient(135deg,#22c55e,#16a34a);
- padding:12px 24px;
- border-radius:14px;
+ padding:12px 26px;
+ border-radius:16px;
  color:#fff;
  border:none;
  margin-top:12px;
- font-weight:700;
- letter-spacing:.5px;
+ font-weight:800;
+ letter-spacing:.7px;
  cursor:pointer;
  transition:.3s;
- box-shadow:0 0 12px rgba(34,197,94,.5)
+ box-shadow:0 0 15px rgba(34,197,94,.5);
+ animation:pulse 1.5s infinite;
 }
-
+.buy-btn:hover{
+ transform:scale(1.1);
+ box-shadow:0 0 30px rgba(34,197,94,1);
+}
 .buy-btn:hover{
  transform:scale(1.08);
- box-shadow:0 0 22px rgba(34,197,94,.8)
+ box-shadow:0 0 22px rgba(34,197,94,.8);
 }
 
-/* REVIEW */
-.review-container{
- position:fixed;
- bottom:20px;
- left:20px
+.review-container{position:fixed;bottom:20px;left:20px}
+.review{background:#2a2a2a;padding:10px;border-radius:12px;width:200px}
+.stars{color:gold}
+
+.tiktok{position:fixed;bottom:20px;right:20px;background:#2a2a2a;padding:10px;border-radius:10px}
+@keyframes fadeUp{
+ from{opacity:0;transform:translateY(15px)}
+ to{opacity:1;transform:translateY(0)}
 }
 
-.review{
- background:#2a2a2a;
- padding:10px;
- border-radius:12px;
- width:200px
+@keyframes pulse{
+ 0%{transform:scale(1)}
+ 50%{transform:scale(1.05)}
+ 100%{transform:scale(1)}
 }
-
-.stars{
- color:gold
-}
-
-/* TIKTOK */
-.tiktok{
- position:fixed;
- bottom:20px;
- right:20px;
- background:#2a2a2a;
- padding:10px;
- border-radius:10px
-}
-
 </style>
 </head>
-
 <body>
 
 <h1>NYC Store</h1>
 
-<div class="cart" onclick="openCart()">
-🛒
-<span id="count">0</span>
-</div>
+<div class="cart" onclick="openCart()">🛒<span id="count">0</span></div>
 
 <div class="categories">
- <div class="cat" onclick="show('subs')">اشتراك حساب</div>
- <div class="cat" onclick="show('profiles')">اشتراك ملف</div>
+<div class="cat" onclick="show('subs')">اشتراك حساب</div>
+<div class="cat" onclick="show('profiles')">اشتراك ملف</div>
 </div>
 
-<!-- PRODUCTS -->
 <div class="products" id="subs">
-
- <div class="card">
-  <img src="https://picsum.photos/400/200?1">
-  <div class="card-content">
-   Netflix
-   <div class="price">14 ريال</div>
-   <button class="btn" onclick="openDetails('netflix',14,this.parentElement.parentElement.querySelector('img').src)">
-    التفاصيل
-   </button>
-  </div>
- </div>
-
- <!-- باقي المنتجات نفس النمط -->
-
+<div class="card"><img src="https://picsum.photos/400/200?1"><div class="card-content">Netflix<div class="price">14 ريال</div><button class="btn" onclick="openDetails('netflix',14,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
+<div class="card"><img src="https://picsum.photos/400/200?2"><div class="card-content">OSN<div class="price">15 ريال</div><button class="btn" onclick="openDetails('osn',15,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
+<div class="card"><img src="https://picsum.photos/400/200?3"><div class="card-content">Prime<div class="price">12 ريال</div><button class="btn" onclick="openDetails('prime',12,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
+<div class="card"><img src="https://picsum.photos/400/200?4"><div class="card-content">Shahid<div class="price">24 ريال</div><button class="btn" onclick="openDetails('shahid',24,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
+<div class="card"><img src="https://picsum.photos/400/200?5"><div class="card-content">YouTube<div class="price">12 ريال</div><button class="btn" onclick="openDetails('youtube',12,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
 </div>
 
 <div class="products" id="profiles">
- <div class="card">
-  <img src="https://picsum.photos/400/200?6">
-  <div class="card-content">
-   Netflix Profile
-   <div class="price">6 ريال</div>
-   <button class="btn" onclick="openDetails('netflix',6,this.parentElement.parentElement.querySelector('img').src)">
-    التفاصيل
-   </button>
-  </div>
- </div>
+<div class="card"><img src="https://picsum.photos/400/200?6"><div class="card-content">Netflix Profile<div class="price">6 ريال</div><button class="btn" onclick="openDetails('netflix',6,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
 </div>
 
-<!-- DETAILS -->
 <div class="details" id="details">
- <div class="box">
-  <img id="img">
-  <h3 id="name"></h3>
-  <p id="desc"></p>
-  <button class="btn" onclick="addToCart()">إضافة للسلة</button>
-  <button class="btn" onclick="back()">رجوع</button>
- </div>
+<div class="box">
+<img id="img">
+<h3 id="name"></h3>
+<p id="desc"></p>
+<button class="btn" onclick="addToCart()">إضافة للسلة</button>
+<button class="btn" onclick="back()">رجوع</button>
+</div>
 </div>
 
-<!-- CART -->
 <div class="cart-page" id="cart">
- <h2>السلة</h2>
- <div id="items"></div>
- <div class="total" id="total"></div>
-
- <button class="buy-btn" onclick="goBuy()">شراء</button>
- <button class="btn" onclick="backHome()">رجوع</button>
+<h2>السلة</h2>
+<div id="items"></div>
+<div class="total" id="total"></div>
+<button class="buy-btn" onclick="goBuy()">شراء</button>
+<button class="btn" onclick="backHome()">رجوع</button>
 </div>
 
-<!-- REVIEW -->
 <div class="review-container">
- <div class="review">
-  <div>محمد</div>
-  <div class="stars">★★★★★</div>
-  <p>ما قصروا</p>
- </div>
+<div class="review">
+<div>محمد</div>
+<div class="stars">★★★★★</div>
+<p>ما قصروا</p>
+</div>
 </div>
 
-<!-- TIKTOK -->
 <div class="tiktok">
- <a href="https://www.tiktok.com/@f.0aha" target="_blank">
-  <img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png" width="30">
- </a>
+<a href="https://www.tiktok.com/@f.0aha" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png" width="30">
+</a>
 </div>
 
 <script>
+let cart=[];
+let current={};
 
-// نفس الكود بدون تعديل
+const detailsData={
+osn:`اشتراك OSN\nحساب شهري 15 ريال\nملف خاص 6 ريال\n\nالمميزات\nباقة بريميوم\nضمان 28 يوم\n4K\nيدعم كل الاجهزة\nتسجيل دخول بجهاز واحد`,
+netflix:`اشتراك نتفلكس\nحساب شهر 14 ريال\nملف خاص 6 ريال\n\nمميزات\nاعلى جودة\nيدعم الهاتف والكمبيوتر والتابلت\nضمان 25 يوم`,
+prime:`اشتراك برايم فيديو\nحساب شهر 12 ريال\nملف خاص 6 ريال\n\nمميزات\nيدعم جميع الاجهزة\nممنوع تغيير معلومات حساب\nضمان كامل المدة`,
+shahid:`شاهد شامل\nحساب شهر 24 ريال\nملف خاص دينار\n\nمميزات\nFULL HD\nمسلسلات حصرية\nبدون فواصل اعلانيه\nضمان كامل المدة`,
+youtube:`اشتراك يوتيوب\n12 ريال\n\nمميزات\nبدون اعلانات\nتشغيل خلفية\nتحميل مقاطع\nضمان كامل مدة`
+};
 
+function hideExtras(){
+ document.querySelector('.review-container').style.display='none';
+ document.querySelector('.tiktok').style.display='none';
+}
+
+function show(id){
+ hideExtras();
+ document.getElementById('subs').style.display='none';
+ document.getElementById('profiles').style.display='none';
+ document.getElementById('details').style.display='none';
+ document.getElementById('cart').style.display='none';
+ document.getElementById(id).style.display='grid';
+}
+
+function openDetails(name,price,img){
+ hideExtras();
+ document.getElementById('subs').style.display='none';
+ document.getElementById('profiles').style.display='none';
+ document.getElementById('details').style.display='block';
+ document.getElementById('name').innerText=name;
+ document.getElementById('desc').innerText=detailsData[name.toLowerCase()] || '';
+ document.getElementById('img').src=img;
+ current={name,price};
+}
+
+function addToCart(){
+ cart.push(current);
+ document.getElementById('count').innerText=cart.length;
+}
+
+function openCart(){
+ hideExtras();
+ document.getElementById('details').style.display='none';
+ document.getElementById('subs').style.display='none';
+ document.getElementById('profiles').style.display='none';
+ document.getElementById('cart').style.display='block';
+
+ let html='';let total=0;
+ cart.forEach((item,i)=>{
+ total+=item.price;
+ html+=`<div class="item">${item.name} - ${item.price} ريال <button onclick="removeItem(${i})">❌</button></div>`;
+ });
+
+ document.getElementById('items').innerHTML=html;
+ document.getElementById('total').innerText='المجموع: '+total+' ريال';
+}
+
+function removeItem(i){
+ cart.splice(i,1);
+ document.getElementById('count').innerText=cart.length;
+ openCart();
+}
+
+function back(){location.reload();}
+function backHome(){location.reload();}
+
+function goBuy(){
+ window.open('https://youtu.be/EUtyJM4vvcY?si=JYE7fTc7nyqfyTvR','_blank');
+}
 </script>
 
 </body>
