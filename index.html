@@ -227,7 +227,21 @@ function openDetails(name,price){
 }
 
 function addToCart(){
- cart.push(current);
+
+ let choice = confirm('اضغط موافق = حساب شهر (15 ريال)\nإلغاء = ملف شخصي (6 ريال)');
+
+ let price;
+ let type;
+
+ if(choice){
+   price = 15;
+   type = 'شهر';
+ }else{
+   price = 6;
+   type = 'ملف';
+ }
+
+ cart.push({name:current.name,type:type,price:price});
  document.getElementById('count').innerText=cart.length;
 }
 
@@ -239,7 +253,7 @@ function openCart(){
  let html='';let total=0;
  cart.forEach((item,i)=>{
  total+=item.price;
- html+=`<div class="item">${item.name} - ${item.price} ريال <button onclick="removeItem(${i})">❌</button></div>`;
+ html+=`<div class="item">${item.name} (${item.type}) - ${item.price} ريال <button onclick="removeItem(${i})">❌</button></div>`;
  });
  document.getElementById('items').innerHTML=html;
  document.getElementById('total').innerText='المجموع: '+total+' ريال';
@@ -251,8 +265,15 @@ function removeItem(i){
  openCart();
 }
 
-function back(){location.reload();}
-function backHome(){location.reload();}
+function back(){
+ document.getElementById('details').style.display='none';
+ document.getElementById('subs').style.display='grid';
+}
+
+function backHome(){
+ document.getElementById('cart').style.display='none';
+ document.getElementById('subs').style.display='grid';
+}
 
 function goBuy(){
  window.open('https://youtu.be/EUtyJM4vvcY?si=JYE7fTc7nyqfyTvR','_blank');
