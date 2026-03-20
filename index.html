@@ -124,7 +124,13 @@ function hideExtras(){
  document.querySelector('.tiktok').style.display='none';
 }
 
+function hideExtras(){
+ document.querySelector('.review-container').style.display='none';
+ document.querySelector('.tiktok').style.display='none';
+}
+
 function show(id){
+ hideExtras();
  hideExtras();
  hideExtras();
  document.getElementById('subs').style.display='none';
@@ -141,6 +147,7 @@ function addToCart(){
 }
 
 function openCart(){
+ hideExtras();
  hideExtras();
  document.getElementById('details').style.display='none';
  document.getElementById('subs').style.display='none';
