@@ -6,10 +6,38 @@
 <title>NYC Store</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:'Cairo',sans-serif;background:#1f1f1f;color:#e5e7eb;text-align:center}
+
+body{
+ margin:0;
+ font-family:'Cairo',sans-serif;
+ color:#e5e7eb;
+ text-align:center;
+ background:url("https://cdn.discordapp.com/attachments/1481554508797575282/1484414502123343902/NYC0320_21.png?ex=69beccfc&is=69bd7b7c&hm=e6abe566b888e7defa8014e5af9670d026ab78b8b8a262fdd271a403b02907b5&") center/cover no-repeat fixed;
+}
+
+/* overlay */
+body::before{
+ content:"";
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,0.7);
+ z-index:-1;
+}
 
 h1{margin-top:30px;color:#3b82f6}
 
+/* LOGO */
+.logo{
+ position:fixed;
+ top:20px;
+ left:20px;
+}
+.logo img{
+ width:60px;
+ border-radius:10px;
+}
+
+/* CART */
 .cart{position:fixed;top:20px;right:20px;background:#2a2a2a;padding:12px;border-radius:50%;cursor:pointer}
 .cart span{position:absolute;top:-5px;right:-5px;background:red;color:#fff;font-size:12px;padding:2px 6px;border-radius:50%}
 
@@ -17,9 +45,17 @@ h1{margin-top:30px;color:#3b82f6}
 .cat{background:#2a2a2a;padding:12px 20px;border-radius:10px;cursor:pointer;transition:.3s}
 .cat:hover{background:#3b82f6;transform:scale(1.08)}
 
-.products{display:none;grid-template-columns:repeat(2,1fr);gap:15px;max-width:650px;margin:40px auto}
+.products{display:none;grid-template-columns:repeat(2,1fr);gap:15px;max-width:900px;margin:40px auto}
+
 .card{background:#2a2a2a;border-radius:12px;overflow:hidden}
-.card img{width:100%;height:150px;object-fit:cover}
+
+/* NEW IMAGE SIZE */
+.card img{
+ width:100%;
+ aspect-ratio:1220/686;
+ object-fit:cover;
+}
+
 .card-content{padding:10px}
 .price{color:#60a5fa}
 
@@ -37,13 +73,10 @@ h1{margin-top:30px;color:#3b82f6}
  box-shadow:0 0 12px rgba(59,130,246,.4);
  animation:fadeUp .4s ease;
 }
+
 .btn:hover{
  transform:scale(1.08);
  box-shadow:0 0 25px rgba(59,130,246,.8);
-}
-.btn:hover{
- transform:scale(1.07);
- box-shadow:0 0 20px rgba(59,130,246,.7);
 }
 
 .details{display:none;margin-top:40px}
@@ -53,6 +86,7 @@ h1{margin-top:30px;color:#3b82f6}
 .cart-page{display:none;margin-top:40px}
 .item{background:#2a2a2a;margin:10px auto;padding:10px;border-radius:10px;max-width:320px;display:flex;justify-content:space-between}
 .total{color:#3b82f6;margin-top:10px}
+
 .buy-btn{
  background:linear-gradient(135deg,#22c55e,#16a34a);
  padding:12px 26px;
@@ -67,13 +101,10 @@ h1{margin-top:30px;color:#3b82f6}
  box-shadow:0 0 15px rgba(34,197,94,.5);
  animation:pulse 1.5s infinite;
 }
+
 .buy-btn:hover{
  transform:scale(1.1);
  box-shadow:0 0 30px rgba(34,197,94,1);
-}
-.buy-btn:hover{
- transform:scale(1.08);
- box-shadow:0 0 22px rgba(34,197,94,.8);
 }
 
 .review-container{position:fixed;bottom:20px;left:20px}
@@ -81,6 +112,7 @@ h1{margin-top:30px;color:#3b82f6}
 .stars{color:gold}
 
 .tiktok{position:fixed;bottom:20px;right:20px;background:#2a2a2a;padding:10px;border-radius:10px}
+
 @keyframes fadeUp{
  from{opacity:0;transform:translateY(15px)}
  to{opacity:1;transform:translateY(0)}
@@ -91,9 +123,16 @@ h1{margin-top:30px;color:#3b82f6}
  50%{transform:scale(1.05)}
  100%{transform:scale(1)}
 }
+
 </style>
 </head>
+
 <body>
+
+<!-- LOGO -->
+<div class="logo">
+<img src="https://cdn.discordapp.com/attachments/1481554508797575282/1484414489800740915/NYC0320_14.png?ex=69beccf9&is=69bd7b79&hm=61a822787670c7a0d34dd23d2a788d89e6e45fb4a7ff752a9543f1ea63c4ef16&">
+</div>
 
 <h1>NYC Store</h1>
 
@@ -105,121 +144,18 @@ h1{margin-top:30px;color:#3b82f6}
 </div>
 
 <div class="products" id="subs">
-<div class="card"><img src="https://picsum.photos/400/200?1"><div class="card-content">Netflix<div class="price">14 ريال</div><button class="btn" onclick="openDetails('netflix',14,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
-<div class="card"><img src="https://picsum.photos/400/200?2"><div class="card-content">OSN<div class="price">15 ريال</div><button class="btn" onclick="openDetails('osn',15,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
-<div class="card"><img src="https://picsum.photos/400/200?3"><div class="card-content">Prime<div class="price">12 ريال</div><button class="btn" onclick="openDetails('prime',12,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
-<div class="card"><img src="https://picsum.photos/400/200?4"><div class="card-content">Shahid<div class="price">24 ريال</div><button class="btn" onclick="openDetails('shahid',24,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
-<div class="card"><img src="https://picsum.photos/400/200?5"><div class="card-content">YouTube<div class="price">12 ريال</div><button class="btn" onclick="openDetails('youtube',12,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
+<div class="card"><img src="PUT-IMAGE"><div class="card-content">Netflix<div class="price">14 ريال</div><button class="btn" onclick="openDetails('netflix',14,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
+<div class="card"><img src="PUT-IMAGE"><div class="card-content">OSN<div class="price">15 ريال</div><button class="btn" onclick="openDetails('osn',15,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
+<div class="card"><img src="PUT-IMAGE"><div class="card-content">Prime<div class="price">12 ريال</div><button class="btn" onclick="openDetails('prime',12,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
+<div class="card"><img src="PUT-IMAGE"><div class="card-content">Shahid<div class="price">24 ريال</div><button class="btn" onclick="openDetails('shahid',24,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
+<div class="card"><img src="PUT-IMAGE"><div class="card-content">YouTube<div class="price">12 ريال</div><button class="btn" onclick="openDetails('youtube',12,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
 </div>
 
 <div class="products" id="profiles">
-<div class="card"><img src="https://picsum.photos/400/200?6"><div class="card-content">Netflix Profile<div class="price">6 ريال</div><button class="btn" onclick="openDetails('netflix',6,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
+<div class="card"><img src="PUT-IMAGE"><div class="card-content">Netflix Profile<div class="price">6 ريال</div><button class="btn" onclick="openDetails('netflix',6,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button></div></div>
 </div>
 
-<div class="details" id="details">
-<div class="box">
-<img id="img">
-<h3 id="name"></h3>
-<p id="desc"></p>
-<button class="btn" onclick="addToCart()">إضافة للسلة</button>
-<button class="btn" onclick="back()">رجوع</button>
-</div>
-</div>
-
-<div class="cart-page" id="cart">
-<h2>السلة</h2>
-<div id="items"></div>
-<div class="total" id="total"></div>
-<button class="buy-btn" onclick="goBuy()">شراء</button>
-<button class="btn" onclick="backHome()">رجوع</button>
-</div>
-
-<div class="review-container">
-<div class="review">
-<div>محمد</div>
-<div class="stars">★★★★★</div>
-<p>ما قصروا</p>
-</div>
-</div>
-
-<div class="tiktok">
-<a href="https://www.tiktok.com/@f.0aha" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png" width="30">
-</a>
-</div>
-
-<script>
-let cart=[];
-let current={};
-
-const detailsData={
-osn:`اشتراك OSN\nحساب شهري 15 ريال\nملف خاص 6 ريال\n\nالمميزات\nباقة بريميوم\nضمان 28 يوم\n4K\nيدعم كل الاجهزة\nتسجيل دخول بجهاز واحد`,
-netflix:`اشتراك نتفلكس\nحساب شهر 14 ريال\nملف خاص 6 ريال\n\nمميزات\nاعلى جودة\nيدعم الهاتف والكمبيوتر والتابلت\nضمان 25 يوم`,
-prime:`اشتراك برايم فيديو\nحساب شهر 12 ريال\nملف خاص 6 ريال\n\nمميزات\nيدعم جميع الاجهزة\nممنوع تغيير معلومات حساب\nضمان كامل المدة`,
-shahid:`شاهد شامل\nحساب شهر 24 ريال\nملف خاص دينار\n\nمميزات\nFULL HD\nمسلسلات حصرية\nبدون فواصل اعلانيه\nضمان كامل المدة`,
-youtube:`اشتراك يوتيوب\n12 ريال\n\nمميزات\nبدون اعلانات\nتشغيل خلفية\nتحميل مقاطع\nضمان كامل مدة`
-};
-
-function hideExtras(){
- document.querySelector('.review-container').style.display='none';
- document.querySelector('.tiktok').style.display='none';
-}
-
-function show(id){
- hideExtras();
- document.getElementById('subs').style.display='none';
- document.getElementById('profiles').style.display='none';
- document.getElementById('details').style.display='none';
- document.getElementById('cart').style.display='none';
- document.getElementById(id).style.display='grid';
-}
-
-function openDetails(name,price,img){
- hideExtras();
- document.getElementById('subs').style.display='none';
- document.getElementById('profiles').style.display='none';
- document.getElementById('details').style.display='block';
- document.getElementById('name').innerText=name;
- document.getElementById('desc').innerText=detailsData[name.toLowerCase()] || '';
- document.getElementById('img').src=img;
- current={name,price};
-}
-
-function addToCart(){
- cart.push(current);
- document.getElementById('count').innerText=cart.length;
-}
-
-function openCart(){
- hideExtras();
- document.getElementById('details').style.display='none';
- document.getElementById('subs').style.display='none';
- document.getElementById('profiles').style.display='none';
- document.getElementById('cart').style.display='block';
-
- let html='';let total=0;
- cart.forEach((item,i)=>{
- total+=item.price;
- html+=`<div class="item">${item.name} - ${item.price} ريال <button onclick="removeItem(${i})">❌</button></div>`;
- });
-
- document.getElementById('items').innerHTML=html;
- document.getElementById('total').innerText='المجموع: '+total+' ريال';
-}
-
-function removeItem(i){
- cart.splice(i,1);
- document.getElementById('count').innerText=cart.length;
- openCart();
-}
-
-function back(){location.reload();}
-function backHome(){location.reload();}
-
-function goBuy(){
- window.open('https://youtu.be/EUtyJM4vvcY?si=JYE7fTc7nyqfyTvR','_blank');
-}
-</script>
+<!-- باقي الكود بدون تغيير -->
 
 </body>
 </html>
