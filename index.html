@@ -142,6 +142,18 @@ h1{margin-top:30px;color:#3b82f6}
 </a>
 </div>
 
+ <div id="popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:999">
+  <div style="background:#2a2a2a;padding:20px;border-radius:15px;width:280px;text-align:center">
+    <h3>اختر نوع الحساب</h3>
+    <button onclick="chooseType('month')" style="margin:5px;width:100%;padding:10px;border:none;border-radius:10px;background:#3b82f6;color:#fff;cursor:pointer">
+      حساب شهر - 15 ريال
+    </button>
+    <button onclick="chooseType('profile')" style="margin:5px;width:100%;padding:10px;border:none;border-radius:10px;background:#374151;color:#fff;cursor:pointer">
+      ملف شخصي - 6 ريال
+    </button>
+  </div>
+</div>
+
 <script>
 let cart=[];
 let current={};
@@ -206,6 +218,7 @@ const detailsData={
 ضمان كامل مدة`
 };
 
+ 
 function hideExtras(){
  document.querySelector('.review-container').style.display='none';
  document.querySelector('.tiktok').style.display='none';
@@ -227,22 +240,25 @@ function openDetails(name,price){
 }
 
 function addToCart(){
+ document.getElementById('popup').style.display='flex';
+}
 
- let choice = confirm('اضغط موافق = حساب شهر (15 ريال)\nإلغاء = ملف شخصي (6 ريال)');
-
+ function chooseType(type){
  let price;
- let type;
+ let typeName;
 
- if(choice){
+ if(type === 'month'){
    price = 15;
-   type = 'شهر';
+   typeName = 'شهر';
  }else{
    price = 6;
-   type = 'ملف';
+   typeName = 'ملف';
  }
 
- cart.push({name:current.name,type:type,price:price});
+ cart.push({name:current.name,type:typeName,price:price});
  document.getElementById('count').innerText=cart.length;
+
+ document.getElementById('popup').style.display='none';
 }
 
 function openCart(){
