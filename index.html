@@ -14,10 +14,9 @@ body{
  font-family:'Cairo',sans-serif;
  color:#e5e7eb;
  text-align:center;
- background:url("https://cdn.discordapp.com/attachments/1481554508797575282/1484414502123343902/NYC0320_21.png?ex=69beccfc&is=69bd7b7c&hm=e6abe566b888e7defa8014e5af9670d026ab78b8b8a262fdd271a403b02907b5&") center/cover no-repeat fixed;
+ background:url("https://cdn.discordapp.com/attachments/1481554508797575282/1484414502123343902/NYC0320_21.png") center/cover no-repeat fixed;
 }
 
-/* overlay */
 body::before{
  content:"";
  position:fixed;
@@ -28,18 +27,6 @@ body::before{
 
 h1{margin-top:30px;color:#3b82f6}
 
-/* LOGO */
-.logo{
- position:fixed;
- top:20px;
- left:20px;
-}
-.logo img{
- width:60px;
- border-radius:10px;
-}
-
-/* CART */
 .cart{
  position:fixed;
  top:20px;
@@ -60,7 +47,6 @@ h1{margin-top:30px;color:#3b82f6}
  border-radius:50%;
 }
 
-/* CATEGORIES */
 .categories{
  display:flex;
  gap:15px;
@@ -79,7 +65,6 @@ h1{margin-top:30px;color:#3b82f6}
  transform:scale(1.08);
 }
 
-/* PRODUCTS */
 .products{
  display:none;
  grid-template-columns:repeat(2,1fr);
@@ -103,7 +88,6 @@ h1{margin-top:30px;color:#3b82f6}
 .card-content{padding:10px}
 .price{color:#60a5fa}
 
-/* BUTTON */
 .btn{
  background:linear-gradient(135deg,#3b82f6,#2563eb);
  color:#fff;
@@ -119,7 +103,6 @@ h1{margin-top:30px;color:#3b82f6}
  transform:scale(1.08);
 }
 
-/* DETAILS */
 .details{display:none;margin-top:40px}
 .box{
  background:#2a2a2a;
@@ -135,7 +118,6 @@ h1{margin-top:30px;color:#3b82f6}
  margin-bottom:10px;
 }
 
-/* CART */
 .cart-page{display:none;margin-top:40px}
 .item{
  background:#2a2a2a;
@@ -158,7 +140,6 @@ h1{margin-top:30px;color:#3b82f6}
  cursor:pointer;
 }
 
-/* REVIEW */
 .review-container{
  position:fixed;
  bottom:20px;
@@ -172,7 +153,6 @@ h1{margin-top:30px;color:#3b82f6}
 }
 .stars{color:gold}
 
-/* TIKTOK */
 .tiktok{
  position:fixed;
  bottom:20px;
@@ -187,11 +167,6 @@ h1{margin-top:30px;color:#3b82f6}
 
 <body>
 
-<!-- LOGO -->
-<div class="logo">
-<img src="PUT-YOUR-LOGO-LINK-HERE">
-</div>
-
 <h1>NYC Store</h1>
 
 <div class="cart" onclick="openCart()">🛒<span id="count">0</span></div>
@@ -201,69 +176,66 @@ h1{margin-top:30px;color:#3b82f6}
 <div class="cat" onclick="show('profiles')">اشتراك ملف</div>
 </div>
 
-<!-- PRODUCTS -->
 <div class="products" id="subs">
 
 <div class="card">
-<img src="PUT-IMAGE">
+<img id="img-netflix">
 <div class="card-content">
 Netflix
 <div class="price">14 ريال</div>
-<button class="btn" onclick="openDetails('netflix',14,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button>
+<button class="btn" onclick="openDetails('netflix',14,productImages.netflix)">التفاصيل</button>
 </div>
 </div>
 
 <div class="card">
-<img src="PUT-IMAGE">
+<img id="img-osn">
 <div class="card-content">
 OSN
 <div class="price">15 ريال</div>
-<button class="btn" onclick="openDetails('osn',15,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button>
+<button class="btn" onclick="openDetails('osn',15,productImages.osn)">التفاصيل</button>
 </div>
 </div>
 
 <div class="card">
-<img src="PUT-IMAGE">
+<img id="img-prime">
 <div class="card-content">
 Prime
 <div class="price">12 ريال</div>
-<button class="btn" onclick="openDetails('prime',12,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button>
+<button class="btn" onclick="openDetails('prime',12,productImages.prime)">التفاصيل</button>
 </div>
 </div>
 
 <div class="card">
-<img src="PUT-IMAGE">
+<img id="img-shahid">
 <div class="card-content">
 Shahid
 <div class="price">24 ريال</div>
-<button class="btn" onclick="openDetails('shahid',24,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button>
+<button class="btn" onclick="openDetails('shahid',24,productImages.shahid)">التفاصيل</button>
 </div>
 </div>
 
 <div class="card">
-<img src="PUT-IMAGE">
+<img id="img-youtube">
 <div class="card-content">
 YouTube
 <div class="price">12 ريال</div>
-<button class="btn" onclick="openDetails('youtube',12,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button>
+<button class="btn" onclick="openDetails('youtube',12,productImages.youtube)">التفاصيل</button>
 </div>
 </div>
 
 </div>
 
-<!-- PROFILES -->
 <div class="products" id="profiles">
 <div class="card">
-<img src="PUT-IMAGE">
+<img id="img-profile">
 <div class="card-content">
 Netflix Profile
 <div class="price">6 ريال</div>
-<button class="btn" onclick="openDetails('netflix',6,this.parentElement.parentElement.querySelector('img').src)">التفاصيل</button>
+<button class="btn" onclick="openDetails('netflix',6,productImages.netflix)">التفاصيل</button>
 </div>
 </div>
 </div>
 
-<!-- DETAILS -->
 <div class="details" id="details">
 <div class="box">
 <img id="img">
@@ -274,7 +246,6 @@ Netflix Profile
 </div>
 </div>
 
-<!-- CART -->
 <div class="cart-page" id="cart">
 <h2>السلة</h2>
 <div id="items"></div>
@@ -283,7 +254,6 @@ Netflix Profile
 <button class="btn" onclick="backHome()">رجوع</button>
 </div>
 
-<!-- REVIEW -->
 <div class="review-container">
 <div class="review">
 <div>محمد</div>
@@ -292,7 +262,6 @@ Netflix Profile
 </div>
 </div>
 
-<!-- TIKTOK -->
 <div class="tiktok">
 <a href="https://www.tiktok.com/@nyc.store1" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png" width="30">
@@ -303,12 +272,29 @@ Netflix Profile
 let cart=[];
 let current={};
 
+const productImages = {
+ netflix: "https://cdn.discordapp.com/attachments/1481554508797575282/1484414736077422772/NYC0320_19.png?ex=69becd34&is=69bd7bb4&hm=adacab10307204d22496d1b535a0d46aa5b06d6c021d661e4a272e25248ab6a2&",
+ osn: "https://cdn.discordapp.com/attachments/1481554508797575282/1484414637956005968/NYC0320_2.png?ex=69becd1c&is=69bd7b9c&hm=5cea6effcc0838ac97affafc59ec64beef74b72c38cdaae0ca148858e75a918e&",
+ prime: "https://cdn.discordapp.com/attachments/1481554508797575282/1484414700686151831/NYC0320_8.png?ex=69becd2b&is=69bd7bab&hm=39a431920c3ab86c40446b3b93a1098d4228e898d23227596d95218ed8f34bea&",
+ shahid: "https://cdn.discordapp.com/attachments/1481554508797575282/1484414669648167062/NYC0320_1.png?ex=69becd24&is=69bd7ba4&hm=3345ffe37442d990210a3828d5c6db8d23f39686fa0ecf08de70b10ff14986d1&",
+ youtube: "https://cdn.discordapp.com/attachments/1481554508797575282/1484414759510999172/NYC0320_6.png?ex=69becd39&is=69bd7bb9&hm=0e2a441c0aba37ed1963f5a719c63c4448ac050b2dd94010623361bdaa96a7c0&"
+};
+
+window.onload = () => {
+ document.getElementById("img-netflix").src = productImages.netflix;
+ document.getElementById("img-osn").src = productImages.osn;
+ document.getElementById("img-prime").src = productImages.prime;
+ document.getElementById("img-shahid").src = productImages.shahid;
+ document.getElementById("img-youtube").src = productImages.youtube;
+ document.getElementById("img-profile").src = productImages.netflix;
+};
+
 const detailsData={
-osn:`اشتراك OSN\nحساب شهري 15 ريال\nملف خاص 6 ريال\n\nالمميزات\nباقة بريميوم\nضمان 28 يوم\n4K\nيدعم كل الاجهزة`,
-netflix:`اشتراك نتفلكس\nحساب شهر 14 ريال\nملف خاص 6 ريال\n\nمميزات\nاعلى جودة\nضمان 25 يوم`,
-prime:`اشتراك برايم فيديو\nحساب شهر 12 ريال\nملف خاص 6 ريال`,
-shahid:`شاهد شامل\nحساب شهر 24 ريال`,
-youtube:`اشتراك يوتيوب\n12 ريال`
+osn:`اشتراك OSN\nحساب شهري 15 ريال`,
+netflix:`اشتراك نتفلكس\nحساب شهر 14 ريال`,
+prime:`اشتراك برايم فيديو`,
+shahid:`شاهد شامل`,
+youtube:`اشتراك يوتيوب`
 };
 
 function hideExtras(){
@@ -331,7 +317,7 @@ function openDetails(name,price,img){
  document.getElementById('profiles').style.display='none';
  document.getElementById('details').style.display='block';
  document.getElementById('name').innerText=name;
- document.getElementById('desc').innerText=detailsData[name.toLowerCase()] || '';
+ document.getElementById('desc').innerText=detailsData[name];
  document.getElementById('img').src=img;
  current={name,price};
 }
