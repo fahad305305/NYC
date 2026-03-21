@@ -9,7 +9,7 @@
 
 <style>
 
- .reviews-box{
+.reviews-box{
  position:fixed;
  bottom:20px;
  left:20px;
@@ -26,7 +26,8 @@
  border-radius:12px;
  width:220px;
  align-items:center;
- animation:fadeIn .5s;
+ animation:slideIn .5s;
+ opacity:1;
 }
 
 .review-card img{
@@ -35,9 +36,17 @@
  border-radius:50%;
 }
 
-@keyframes fadeIn{
- from{opacity:0;transform:translateY(10px)}
- to{opacity:1;transform:translateY(0)}
+@keyframes slideIn{
+ from{opacity:0;transform:translateX(-20px)}
+ to{opacity:1;transform:translateX(0)}
+}
+
+.fadeOut{
+ animation:fadeOut .5s forwards;
+}
+
+@keyframes fadeOut{
+ to{opacity:0;transform:translateX(-30px)}
 }
 
 
@@ -270,27 +279,7 @@ h1{margin-top:30px;color:#3b82f6}
 
 <body>
 
- <div class="reviews-box">
-
-  <div class="review-card">
-    <img src="https://i.pravatar.cc/40?img=1">
-    <div>
-      <strong>محمد</strong>
-      <div class="stars">★★★★★</div>
-      <p>سريعين وخدمة ممتازة</p>
-    </div>
-  </div>
-
-  <div class="review-card">
-    <img src="https://i.pravatar.cc/40?img=2">
-    <div>
-      <strong>أحمد</strong>
-      <div class="stars">★★★★★</div>
-      <p>أفضل متجر صراحة</p>
-    </div>
-  </div>
-
-</div>
+<div class="reviews-box" id="reviewsBox"></div>
 
 
  <div class="tiktok-btn">
@@ -414,6 +403,71 @@ z-index:9999;
 <script>
 let cart=[];
 let current={};
+
+ const reviews = [
+ {name:"البرشلوني",text:"خدمة سريعة جدًا 🔥"},
+ {name:"احمد السليم",text:"أفضل متجر تعاملت معه"},
+ {name:"سالم الشريف",text:"وصلني الحساب خلال دقيقة"},
+ {name:"عبدلله احمد",text:"أسعارهم خيالية"},
+ {name:"خالد الشمري",text:"أنصح فيه بقوة"},
+ {name:"ناصر العصيمي",text:"ثقة واحتراف"},
+ {name:"عبدالرحمن العجمي",text:"رجعت أطلب مرة ثانية"},
+ {name:"تركي ال مصره",text:"سريعين مرة 🔥"},
+ {name:"سعود الشلاحي",text:"أفضل دعم"},
+ {name:"يوسف الكندري",text:"ممتاز جدًا"},
+ {name:"راشد مبارك القبندي",text:"ما قصروا"},
+ {name:"حمد العازمي",text:"خدمة رهيبة"},
+ {name:"علي تركي الزرقاوي",text:"اشتغل تمام"},
+ {name:"شريف الخالدي",text:"أفضل تجربة"},
+ {name:"مبارك الدوسري",text:"سريع وموثوق"},
+ {name:"غيث المطيري",text:"كل شي تمام"},
+ {name:"حسين عباس",text:"أنصح بيه"},
+ {name:"ماجد الهاجري",text:"متجر قوي"},
+ {name:"عبدالعزيز الجبلي",text:"10/10 🔥"},
+ {name:"ديور",text:"فخم والله"}
+];
+
+let currentIndex = 0;
+
+function createReview(review){
+ return `
+ <div class="review-card">
+   <img src="https://i.pravatar.cc/40?u=${Math.random()}">
+   <div>
+     <strong>${review.name}</strong>
+     <div class="stars">★★★★★</div>
+     <p>${review.text}</p>
+   </div>
+ </div>
+ `;
+}
+
+function updateReviews(){
+ let box = document.getElementById('reviewsBox');
+
+ // نحذف القديم بانميشن
+ let cards = box.querySelectorAll('.review-card');
+ cards.forEach(c => c.classList.add('fadeOut'));
+
+ setTimeout(()=>{
+   box.innerHTML = "";
+
+   // نحط 2 تقييم فوق بعض
+   for(let i=0;i<2;i++){
+     let review = reviews[(currentIndex+i)%reviews.length];
+     box.innerHTML += createReview(review);
+   }
+
+   currentIndex = (currentIndex + 2) % reviews.length;
+
+ },400);
+}
+
+// أول تشغيل
+updateReviews();
+
+// يتغير كل 3 ثواني
+setInterval(updateReviews,3000);
 
 const detailsImages={
  netflix:"https://cdn.discordapp.com/attachments/1481554508797575282/1484414736077422772/NYC0320_19.png?ex=69becd34&is=69bd7bb4&hm=adacab10307204d22496d1b535a0d46aa5b06d6c021d661e4a272e25248ab6a2&",
