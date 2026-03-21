@@ -9,10 +9,12 @@
 
 <style>
 
-@keyframes pop{
- 0%{transform:scale(0);opacity:0}
- 100%{transform:scale(1);opacity:1}
+ @keyframes bounceCart{
+ 0%{transform:scale(1)}
+ 50%{transform:scale(1.25)}
+ 100%{transform:scale(1)}
 }
+
  
 body{
  margin:0;
@@ -32,6 +34,16 @@ body::before{
 
 h1{margin-top:30px;color:#3b82f6}
 
+ .review-container,
+.tiktok{
+ z-index:1;
+}
+
+#popup{
+ z-index:99999;
+}
+
+ 
 .cart{
  position:fixed;
  top:20px;
@@ -192,6 +204,15 @@ h1{margin-top:30px;color:#3b82f6}
  padding:10px;
  border-radius:10px
 }
+ #popup button{
+ width:100%;
+ margin:10px 0;
+}
+
+@keyframes pop{
+ 0%{transform:scale(0);opacity:0}
+ 100%{transform:scale(1);opacity:1}
+}
 </style>
 </head>
 
@@ -276,13 +297,35 @@ YouTube
 تمت الإضافة إلى السلة
 </div>
 
-<div id="popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:999">
-  <div style="background:#2a2a2a;padding:20px;border-radius:15px;width:280px;text-align:center;animation:pop .3s">
+<div id="popup" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+justify-content:center;
+align-items:center;
+z-index:9999;
+">
+
+  <div style="
+  background:#2a2a2a;
+  padding:20px;
+  border-radius:15px;
+  width:280px;
+  text-align:center;
+  animation:pop .3s;
+  position:relative;
+  z-index:10000;
+  ">
+
     <h3>اختر نوع الحساب</h3>
     <div id="popupOptions"></div>
     <button class="btn" onclick="closePopup()">إلغاء</button>
+
   </div>
 </div>
+
+ <audio id="successSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=success-1-6297.mp3"></audio>
  
 <script>
 let cart=[];
@@ -320,12 +363,18 @@ function openDetails(name,price){
 function addToCart(){
 
  // يوتيوب بدون خيارات
- if(current.name === 'youtube'){
-   cart.push({name:'YouTube',type:'شهر',price:12});
-   document.getElementById('count').innerText=cart.length;
-   showSuccessBar();
-   return;
- }
+if(current.name === 'youtube'){
+ cart.push({name:'YouTube',type:'شهر',price:12});
+ document.getElementById('count').innerText=cart.length;
+
+ showSuccessBar();
+
+ setTimeout(()=>{
+   openCart();
+ },500);
+
+ return;
+}
 
  let html='';
 
@@ -354,15 +403,72 @@ function addToCart(){
  }
 
  document.getElementById('popupOptions').innerHTML=html;
- document.getElementById('popup').style.display='flex';
+let popup = document.getElementById('popup');
+popup.style.display='flex';
+popup.style.pointerEvents='auto';
 }
 
 function showSuccessBar(){
  let bar=document.getElementById('successBar');
+
+ // صوت
+document.getElementById('successSound').play().catch(()=>{});
+ 
+ // اهتزاز
+ if(navigator.vibrate){
+   navigator.vibrate(100);
+ }
+
+ // glow للسلة
+let cartBtn=document.querySelector('.cart');
+
+// Glow
+cartBtn.style.boxShadow='0 0 20px #22c55e';
+
+// Bounce
+cartBtn.style.animation='bounceCart 0.4s';
+
+setTimeout(()=>{
+ cartBtn.style.animation='';
+ cartBtn.style.boxShadow='none';
+},500);
+
+ // انيميشن
  bar.style.top='20px';
- setTimeout(()=>{bar.style.top='-80px'},1500);
+ bar.style.opacity='1';
+ bar.style.transform='translateX(-50%) scale(1.1)';
+
+ setTimeout(()=>{
+   bar.style.transform='translateX(-50%) scale(1)';
+ },200);
+
+ setTimeout(()=>{
+   bar.style.top='-80px';
+   bar.style.opacity='0';
+ },1200);
 }
 
+ function closePopup(){
+ document.getElementById('popup').style.display='none';
+}
+
+function chooseType(type,price){
+ cart.push({
+   name:current.name,
+   type:type,
+   price:price
+ });
+
+ document.getElementById('count').innerText=cart.length;
+
+ closePopup();
+ showSuccessBar();
+
+ setTimeout(()=>{
+   openCart();
+ },500);
+}
+ 
 function openCart(){
  document.getElementById('details').style.display='none';
  document.getElementById('subs').style.display='none';
@@ -392,6 +498,13 @@ function goBuy(){
  window.open('https://youtu.be/EUtyJM4vvcY?si=JYE7fTc7nyqfyTvR','_blank');
 }
 </script>
+
+ window.onclick = function(e){
+ let popup = document.getElementById('popup');
+ if(e.target === popup){
+   popup.style.display = 'none';
+ }
+}
 
 </body>
 </html>
