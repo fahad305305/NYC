@@ -9,6 +9,58 @@
 
 <style>
 
+ .reviews-box{
+ position:fixed;
+ bottom:20px;
+ left:20px;
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+}
+
+.review-card{
+ display:flex;
+ gap:10px;
+ background:#2a2a2a;
+ padding:10px;
+ border-radius:12px;
+ width:220px;
+ align-items:center;
+ animation:fadeIn .5s;
+}
+
+.review-card img{
+ width:40px;
+ height:40px;
+ border-radius:50%;
+}
+
+@keyframes fadeIn{
+ from{opacity:0;transform:translateY(10px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+
+ .tiktok-btn{
+ position:fixed;
+ bottom:20px;
+ right:20px;
+ background:#2a2a2a;
+ padding:10px;
+ border-radius:12px;
+ transition:.3s;
+}
+
+.tiktok-btn img{
+ width:30px;
+}
+
+.tiktok-btn:hover{
+ transform:scale(1.1);
+}
+
+ 
+
  @keyframes bounceCart{
  0%{transform:scale(1)}
  50%{transform:scale(1.25)}
@@ -240,36 +292,6 @@ h1{margin-top:30px;color:#3b82f6}
 
 </div>
 
- .reviews-box{
- position:fixed;
- bottom:20px;
- left:20px;
- display:flex;
- flex-direction:column;
- gap:10px;
-}
-
-.review-card{
- display:flex;
- gap:10px;
- background:#2a2a2a;
- padding:10px;
- border-radius:12px;
- width:220px;
- align-items:center;
- animation:fadeIn .5s;
-}
-
-.review-card img{
- width:40px;
- height:40px;
- border-radius:50%;
-}
-
-@keyframes fadeIn{
- from{opacity:0;transform:translateY(10px)}
- to{opacity:1;transform:translateY(0)}
-}
 
  <div class="tiktok-btn">
 <a href="https://www.tiktok.com/@nyc.store1" target="_blank">
@@ -277,23 +299,6 @@ h1{margin-top:30px;color:#3b82f6}
 </a>
 </div>
 
- .tiktok-btn{
- position:fixed;
- bottom:20px;
- right:20px;
- background:#2a2a2a;
- padding:10px;
- border-radius:12px;
- transition:.3s;
-}
-
-.tiktok-btn img{
- width:30px;
-}
-
-.tiktok-btn:hover{
- transform:scale(1.1);
-}
 
 <h1>NYC Store</h1>
 
