@@ -218,6 +218,83 @@ h1{margin-top:30px;color:#3b82f6}
 
 <body>
 
+ <div class="reviews-box">
+
+  <div class="review-card">
+    <img src="https://i.pravatar.cc/40?img=1">
+    <div>
+      <strong>محمد</strong>
+      <div class="stars">★★★★★</div>
+      <p>سريعين وخدمة ممتازة</p>
+    </div>
+  </div>
+
+  <div class="review-card">
+    <img src="https://i.pravatar.cc/40?img=2">
+    <div>
+      <strong>أحمد</strong>
+      <div class="stars">★★★★★</div>
+      <p>أفضل متجر صراحة</p>
+    </div>
+  </div>
+
+</div>
+
+ .reviews-box{
+ position:fixed;
+ bottom:20px;
+ left:20px;
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+}
+
+.review-card{
+ display:flex;
+ gap:10px;
+ background:#2a2a2a;
+ padding:10px;
+ border-radius:12px;
+ width:220px;
+ align-items:center;
+ animation:fadeIn .5s;
+}
+
+.review-card img{
+ width:40px;
+ height:40px;
+ border-radius:50%;
+}
+
+@keyframes fadeIn{
+ from{opacity:0;transform:translateY(10px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+ <div class="tiktok-btn">
+<a href="https://www.tiktok.com/@nyc.store1" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png">
+</a>
+</div>
+
+ .tiktok-btn{
+ position:fixed;
+ bottom:20px;
+ right:20px;
+ background:#2a2a2a;
+ padding:10px;
+ border-radius:12px;
+ transition:.3s;
+}
+
+.tiktok-btn img{
+ width:30px;
+}
+
+.tiktok-btn:hover{
+ transform:scale(1.1);
+}
+
 <h1>NYC Store</h1>
 
 <div class="cart" onclick="openCart()">🛒<span id="count">0</span></div>
@@ -325,7 +402,9 @@ z-index:9999;
   </div>
 </div>
 
- <audio id="successSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=success-1-6297.mp3"></audio>
+<audio id="successSound" preload="auto">
+<source src="https://cdn.discordapp.com/attachments/1279907327046062161/1484719682559807678/DING_SOUND_EFFECT_-_DOWNLOAD_LINK_1.mp3?ex=69bf4075&is=69bdeef5&hm=06d2cbb7b58260ae7faa5e758c7ec2c2bd96d5776301113072ccda9e35c3a2ec&" type="audio/mpeg">
+</audio>
  
 <script>
 let cart=[];
