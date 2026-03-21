@@ -8,6 +8,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+@keyframes pop{
+ 0%{transform:scale(0);opacity:0}
+ 100%{transform:scale(1);opacity:1}
+}
+ 
 body{
  margin:0;
  font-family:'Cairo',sans-serif;
@@ -270,6 +276,14 @@ YouTube
 تمت الإضافة إلى السلة
 </div>
 
+<div id="popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:999">
+  <div style="background:#2a2a2a;padding:20px;border-radius:15px;width:280px;text-align:center;animation:pop .3s">
+    <h3>اختر نوع الحساب</h3>
+    <div id="popupOptions"></div>
+    <button class="btn" onclick="closePopup()">إلغاء</button>
+  </div>
+</div>
+ 
 <script>
 let cart=[];
 let current={};
@@ -304,9 +318,43 @@ function openDetails(name,price){
 }
 
 function addToCart(){
- cart.push(current);
- document.getElementById('count').innerText=cart.length;
- showSuccessBar();
+
+ // يوتيوب بدون خيارات
+ if(current.name === 'youtube'){
+   cart.push({name:'YouTube',type:'شهر',price:12});
+   document.getElementById('count').innerText=cart.length;
+   showSuccessBar();
+   return;
+ }
+
+ let html='';
+
+ if(current.name === 'netflix'){
+   html=`
+   <button class="btn" onclick="chooseType('حساب شهر',14)">حساب شهر - 14 ريال</button>
+   <button class="btn" onclick="chooseType('ملف شخصي',6)">ملف شخصي - 6 ريال</button>`;
+ }
+
+ if(current.name === 'osn'){
+   html=`
+   <button class="btn" onclick="chooseType('حساب شهر',15)">حساب شهر - 15 ريال</button>
+   <button class="btn" onclick="chooseType('ملف شخصي',6)">ملف شخصي - 6 ريال</button>`;
+ }
+
+ if(current.name === 'prime'){
+   html=`
+   <button class="btn" onclick="chooseType('حساب شهر',12)">حساب شهر - 12 ريال</button>
+   <button class="btn" onclick="chooseType('ملف شخصي',6)">ملف شخصي - 6 ريال</button>`;
+ }
+
+ if(current.name === 'shahid'){
+   html=`
+   <button class="btn" onclick="chooseType('حساب شهر',24)">حساب شهر - 24 ريال</button>
+   <button class="btn" onclick="chooseType('ملف شخصي',12)">ملف شخصي - 12 ريال</button>`;
+ }
+
+ document.getElementById('popupOptions').innerHTML=html;
+ document.getElementById('popup').style.display='flex';
 }
 
 function showSuccessBar(){
@@ -323,7 +371,7 @@ function openCart(){
  let html='';let total=0;
  cart.forEach((item,i)=>{
  total+=item.price;
- html+=`<div class="item">${item.name} - ${item.price} ريال</div>`;
+ html+=`<div class="item">${item.name} (${item.type}) - ${item.price} ريال</div>`;
  });
 
  document.getElementById('items').innerHTML=html;
