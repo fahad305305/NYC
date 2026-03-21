@@ -282,8 +282,8 @@ h1{margin-top:30px;color:#3b82f6}
 <div class="reviews-box" id="reviewsBox"></div>
 
 
- <div class="tiktok-btn">
-<a href="https://www.tiktok.com/@nyc.store1" target="_blank">
+<div class="tiktok-btn" id="tiktokBtn">
+ <a href="https://www.tiktok.com/@nyc.store1" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png">
 </a>
 </div>
@@ -487,6 +487,10 @@ const detailsData={
 
 function show(){
  document.getElementById('subs').style.display='grid';
+
+ // اخفاء التقييمات والتيك توك
+ document.getElementById('reviewsBox').style.display='none';
+ document.getElementById('tiktokBtn').style.display='none';
 }
 
 function openDetails(name,price){
@@ -625,11 +629,19 @@ function openCart(){
 function back(){
  document.getElementById('details').style.display='none';
  document.getElementById('subs').style.display='grid';
+
+ // رجوعهم
+ document.getElementById('reviewsBox').style.display='flex';
+ document.getElementById('tiktokBtn').style.display='block';
 }
 
 function backHome(){
  document.getElementById('cart').style.display='none';
  document.getElementById('subs').style.display='grid';
+
+ // رجوع التقييمات والتيك توك
+ document.getElementById('reviewsBox').style.display='flex';
+ document.getElementById('tiktokBtn').style.display='block';
 }
 
 function goBuy(){
